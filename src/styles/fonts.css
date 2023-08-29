@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'Barlow Bold';
+    src: url('/fonts/Barlow-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Barlow Medium';
+    src: url('/fonts/Barlow-Medium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Barlow SemiBold';
+    src: url('/fonts/Barlow-SemiBold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
