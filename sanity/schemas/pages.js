@@ -29,10 +29,7 @@ export default defineType({
       name: 'buttonCta',
       title: 'Bouton',
       description: "Ajouter un bouton call to action pour rédiriger l'utilisateur vers une autre page. ",
-      type: 'array',
-      of: [
-        {
-          type: 'object',
+      type: 'object',
           fields: [
             {
                 name: 'btnText',
@@ -42,11 +39,11 @@ export default defineType({
               {
                 name: 'btnUrl',
                 title: 'Lien vers la page',
-                type: 'url'
+                type: 'string'
               }
                 ]
-        }
-      ]
+        
+                
     }),
     defineField({
       name: 'faq',

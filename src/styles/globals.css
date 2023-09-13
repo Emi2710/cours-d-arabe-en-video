@@ -15,6 +15,10 @@ body {
   font-family: 'Barlow Medium', sans-serif;
 }
 
+.bold {
+  font-family: var(--barlow-font-bold);
+}
+
 /* polices */
 .texte {
   font-size: 22px;
@@ -22,7 +26,7 @@ body {
 }
 
 .grand-titre {
-  font-size: 40;
+  font-size: 40px;
   font-family: var(--barlow-font-bold);
 }
 
@@ -101,6 +105,24 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+/* PROGRESS BAR */
+
+progress[value] {
+  width: 180px;
+  height: 15px;
+}
+
+progress[value]::-webkit-progress-bar {
+  background-color: #C3CFD9;
+  border-radius: 5px;
+}
+
+progress[value]::-webkit-progress-value {
+  background-color: #56C1A8;
+
+  border-radius: 2px;
 }
 
 

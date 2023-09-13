@@ -136,7 +136,7 @@ export default function Home() {
             <p className="petit-texte text-gris-foncé">Korem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, sollicitudin lacus, Korem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, sollicitudin lacus, Korem ipsum dolor sit amet</p>
 
           <div className="flex items-center pt-5">
-            <Link href="/bien-commencer" className="underline font-bold mr-2">Apprends comment bien démarrer ici</Link>
+            <Link href="/bien-commencer-son-apprentissage" className="underline font-bold mr-2">Apprends comment bien démarrer ici</Link>
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M1.0625 11.5L0 10.4375L8.9375 1.5H4V0H11.5V7.5H10V2.5625L1.0625 11.5Z" fill="#1C1B1F"/>
             </svg>

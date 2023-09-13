@@ -6,7 +6,9 @@ type Props = {}
 export default function Navbar({}: Props) {
 
     
-    const [navbarOpen, setNavbarOpen] = useState(false)   
+  const [navbarOpen, setNavbarOpen] = useState(false)  
+  
+  const [dropDownOpen, setDropDownOpen] = useState(false);
 
 
 
@@ -29,11 +31,20 @@ export default function Navbar({}: Props) {
             <div className='hidden lg:flex text-white mx-5'>
                     <Link href="/" className='px-5'>Accueil</Link>
                     <Link href="/programmes" className='px-5'>Programmes</Link>
-                    <Link href="/" className='px-5'>Informations</Link>
+                    <p className='px-5 cursor-pointer' onClick={() => setDropDownOpen(!dropDownOpen)}>Informations</p>
                     <Link href="/contact" className='px-5'>Contacter</Link>    
             </div>
             
             
+        </div>
+
+        <div className={'information-dropdown flex flex-col absolute right-16 bg-white z-30 effet-orange'  +
+              (dropDownOpen ? " block" : " hidden")}>
+
+                <Link href="/bien-commencer-son-apprentissage" className='py-3 px-4 border-3 border-gris-contour'>Bien commencer son <br/>apprentissage</Link>
+                <Link href="/qui-suis-je" className='py-3 px-4 border-b-3 border-x-3 border-gris-contour'>Qui suis-je ?</Link>
+                <Link href="/faq" className='py-3 px-4 border-b-3 border-x-3 border-gris-contour'>FAQ</Link>
+
         </div>
             
 
@@ -48,7 +59,7 @@ export default function Navbar({}: Props) {
                     <Link href="/" className='pb-4'>Langue arabe</Link>
                     <Link href="/" className='pb-4'>Principe des sciences légiférées</Link>
                     <Link href="/" className='pb-4'>Cours religieux en français</Link>
-                    <Link href="/bien-commencer" className='pb-4'>Bien commencer son apprentissage</Link>
+                    <Link href="/bien-commencer-son-apprentissage" className='pb-4'>Bien commencer son apprentissage</Link>
                     <Link href="/qui-suis-je" className='pb-4'>Qui suis-je ?</Link>
                     <Link href="/faq" className='pb-4'>FAQ</Link>
                     <Link href="/contact">Me contacter</Link>    

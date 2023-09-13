@@ -1,0 +1,101 @@
+/* GENERAL */
+interface Image {
+    _type: 'image';
+    asset: {
+        _ref: string;
+        _type: 'reference';
+    };
+}
+
+/* PAGE INFO */
+
+export interface PageInfo {
+  _id: string;
+  title: string;
+  slug: {
+        current: string;
+  };
+  body: [object];
+  buttonCta: ButtonCta;
+  faq: FAQ[];
+
+};
+
+type ButtonCta = {
+  _id: string;
+  btnText:string;
+  btnUrl: string;
+};
+
+type FAQ = {
+  _id: string;
+  question: string;
+  answer: string;
+};
+
+/* PROGRAMMES INTRO */
+
+export interface ProgrammeIntro {
+    _id : string;
+    _createdAt: string;
+    title: string;
+    slug: {
+        current: string;
+    };
+    mainImage: Image;
+    introShort: string;  
+    
+}
+
+
+/* PROGRAMMES */
+
+export interface Programme {
+  _id : string;
+  _createdAt: string;
+  title: string;
+  slug: {
+        current: string;
+  };
+  mainImage: Image;
+  introShort: string;
+  introDetailed: [object];
+  retrouveLesCours: RetrouveLesCours[];
+  cours: Cours[];
+  
+}
+
+type RetrouveLesCours = {
+  _id: string;
+  linkTitle: string;
+  linkUrl: string;
+
+}
+
+type Cours = {
+  _id: string;
+  name: string;
+  slug: {
+        current: string;
+  };
+
+}
+
+
+/* COURS */
+
+export interface CoursDetails {
+  _id : string;
+  _createdAt: string;
+  name: string;
+  slug: {
+        current: string;
+  };
+  
+}
+
+
+
+
+
+

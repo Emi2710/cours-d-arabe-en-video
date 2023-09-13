@@ -24,8 +24,8 @@ export default function Footer({}: Props) {
                   </div>
 
                   <div className='flex flex-col lg:pr-28'>
-                    <Link href="/bien-commencer" className='pb-4'>Informations</Link>
-                    <Link href="/bien-commencer" className='pb-4'>Bien commencer son apprentissage</Link>
+                    <Link href="/bien-commencer-son-apprentissage" className='pb-4'>Informations</Link>
+                    <Link href="/bien-commencer-son-apprentissage" className='pb-4'>Bien commencer son apprentissage</Link>
                     <Link href="/qui-suis-je" className='pb-4'>Qui suis-je ?</Link>
                     <Link href="/faq" className='pb-4'>FAQ</Link>
                   </div>
