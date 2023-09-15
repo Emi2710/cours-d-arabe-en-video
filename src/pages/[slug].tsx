@@ -24,7 +24,7 @@ const Page = ({page}: Props) => {
         
 
         <article className='px-5 md:px-32 2xl:mx-56'>
-          <div className=''>
+          <div>
 
               <svg className='absolute mt-12' width="55" height="67" viewBox="0 0 55 67" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M0 62.3719C0.28517 61.5493 0.337024 60.866 0.693486 60.468C2.63783 58.2789 3.09799 55.9173 1.74991 53.2306C1.56258 52.6747 1.4407 52.098 1.38693 51.5125C2.03505 51.4661 2.57299 51.2405 2.93593 51.4263C5.84596 52.9056 8.47731 52.8259 10.8429 50.2852C11.0957 50.0066 11.7503 50.1128 12.4762 50C12.4762 51.3267 12.6187 52.5142 12.5345 53.6485C12.4735 54.2836 12.5875 54.9234 12.8635 55.4956C13.1396 56.0677 13.5667 56.5493 14.0965 56.8858C14.602 57.2573 15.1529 57.5492 15.6195 57.9737C16.0862 58.3983 16.4361 58.8626 17 59.4796C16.6155 59.8545 16.2086 60.2045 15.7815 60.5277C15.5097 60.6874 15.2063 60.7827 14.8936 60.8063C12.3012 61.0916 10.8883 62.5709 10.5189 65.231C10.4216 65.8943 10.1948 66.7567 9.35876 66.9624C8.41899 67.1945 8.2051 66.299 7.76438 65.7418C7.61899 65.5921 7.49465 65.4224 7.39496 65.2376C6.44223 63.1414 4.85437 62.3453 2.63134 62.5841C1.74963 62.599 0.868541 62.528 0 62.3719Z" fill="#9EC3F9"/>
@@ -92,8 +92,8 @@ const Page = ({page}: Props) => {
           
           <div  className='flex justify-center'>
 
-            <Link href={`${page.buttonCta.btnUrl}`} className=''>
-              <button className='max-w-3xl mx-auto mb-28 text-xl bold bg-bleu-foncé py-4 px-6 text-white rounded-[5px] effet-bleu tracking-wide'>{page.buttonCta.btnText}</button>
+            <Link href={`${page.buttonCta?.btnUrl}`} className=''>
+              <button className='max-w-3xl mx-auto mb-28 text-xl bold bg-bleu-foncé py-4 px-6 text-white rounded-[5px] effet-bleu tracking-wide'>{page.buttonCta?.btnText}</button>
             </Link>
 
           </div>

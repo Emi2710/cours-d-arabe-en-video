@@ -15,9 +15,9 @@ export interface PageInfo {
   slug: {
         current: string;
   };
-  body: [object];
+  body?: [object];
   buttonCta: ButtonCta;
-  faq: FAQ[];
+  faq?: FAQ[];
 
 };
 
@@ -42,8 +42,8 @@ export interface ProgrammeIntro {
     slug: {
         current: string;
     };
-    mainImage: Image;
-    introShort: string;  
+    mainImage?: Image;
+    introShort?: string;  
     
 }
 
@@ -57,16 +57,16 @@ export interface Programme {
   slug: {
         current: string;
   };
-  mainImage: Image;
-  introShort: string;
-  introDetailed: [object];
-  retrouveLesCours: RetrouveLesCours[];
+  mainImage?: Image;
+  introShort?: string;
+  introDetailed?: [object];
+  retrouveLesCours?: RetrouveLesCours[];
   cours: Cours[];
   
 }
 
-type RetrouveLesCours = {
-  _id: string;
+export type RetrouveLesCours = {
+  _id?: string;
   linkTitle: string;
   linkUrl: string;
 
@@ -86,12 +86,30 @@ type Cours = {
 
 export interface CoursDetails {
   _id : string;
-  _createdAt: string;
-  name: string;
+  name?: string;
   slug: {
         current: string;
   };
+  ressourcesUtiles?: Ressources[];
+  lesson?: Lesson[];
+  category?: string;
   
+}
+
+export type Ressources = {
+  _id?: string;
+  linkTitle?: string;
+  linkUrl?: string;
+  type?: 'pdf' | 'anki' | 'quizlet' | 'schema';
+
+}
+
+export type Lesson = {
+  name: string;
+  lessonLink: string;
+  pdfLink?: string;
+  type?: 'lesson' | 'exam';
+  publishedAt?: Date;
 }
 
 

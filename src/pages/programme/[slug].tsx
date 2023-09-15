@@ -1,12 +1,15 @@
 import { GetStaticProps } from 'next';
 import React, { useState } from 'react'
-import Head from 'next/head';
-import Link from 'next/link';
 import PortableText from 'react-portable-text';
 import { sanityClient, urlFor } from '../../../client/sanity';
 
 import Layout from '../../../components/Layout';
-import { Programme } from '../../../typings';
+import { CoursDetails, Programme } from '../../../typings';
+import RessourcesUtiles from '../../../components/programme/RessourcesUtiles';
+import Lesson from '../../../components/programme/Lesson';
+import RetrouveLesCours from '../../../components/programme/RetrouveLesCours';
+
+
 
 
 interface Props {
@@ -14,21 +17,21 @@ interface Props {
 }
 
 
-
-
 const Page = ({programme}: Props) => {
 
-  
+  const [selectedCourse, setSelectedCourse] = useState<CoursDetails | null>(null); // Specify the type
 
+  const handleCourseClick = (course: CoursDetails) => {
+  setSelectedCourse(course);
+
+  };
   
   return (
     <div>
       <div>
       <Layout>
 
-        <div>
-
-             
+      <div>
 
               <div className='flex flex-col justify-center items-center mt-7 mb-16'>
 
@@ -78,21 +81,7 @@ const Page = ({programme}: Props) => {
             <div className='mx-5'>
               <h3 className='petit-titre mb-5'>Retrouve également les cours ici:</h3>
               {programme.retrouveLesCours?.map((ressource) => (
-                <div className='mb-4 border-3 border-gris-contour text-center py-6'>
-                  <Link href={ressource.linkUrl} className='text-gris-foncé bold underline flex items-center justify-center'>
-                    
-                    {ressource.linkTitle} 
-                  
-                  <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <mask id="mask0_541_12067" maskUnits="userSpaceOnUse" x="0" y="0" width="21" height="21">
-                    <rect x="0.5" y="0.5" width="20" height="20" fill="#D9D9D9"/>
-                    </mask>
-                    <g mask="url(#mask0_541_12067)">
-                    <path d="M5.5625 16.5L4.5 15.4375L13.4375 6.5H8.5V5H16V12.5H14.5V7.5625L5.5625 16.5Z" fill="#424242"/>
-                    </g>
-                    </svg>
-                  </Link>
-                </div>
+                <RetrouveLesCours linkTitle={ressource.linkTitle} linkUrl={ressource.linkUrl} />
               ))}
             </div>
 
@@ -114,7 +103,7 @@ const Page = ({programme}: Props) => {
 
           {programme.cours? (
 
-          <div className='mx-5'>
+          <div className='mx-5 mb-20'>
                       <div>
                           <h3 className='petit-titre mb-5'>Sommaire</h3> 
                           <div></div> 
@@ -122,19 +111,59 @@ const Page = ({programme}: Props) => {
                       
                       <div>
                         {programme.cours?.map((cours) => (
-                          <div className='flex justify-between'>
-                            <p className='cursor-pointer mb-3.5 text-gris-foncé underline bold'>{cours.name}</p>
+                          <div className='flex justify-between' >
+                            <p className='cursor-pointer mb-3.5 text-gris-foncé underline bold' onClick={() => handleCourseClick(cours)}>{cours.name}</p>
                             <p className='text-gris-contour'>0%</p>
                           </div>
                         ))}
                       </div>
                       
-          </div>
+          </div> 
 
           ): ''}
 
+          {selectedCourse ? (
+          <div className='mx-5'>
+              <h3 className="petit-titre mb-3">{selectedCourse.name}</h3>
 
-          
+              <div className='flex items-center mb-10'>
+                
+                <progress id="file" max="100" value="50" className='progress_bar'/> 
+                <p className='pl-2'>50%</p>
+  
+              </div>
+
+
+              {selectedCourse.ressourcesUtiles? (
+
+                <div className='mb-16 py-7 px-6 bg-gris-clair'>
+                  <h4 className='petit-titre'>📚Ressources utiles</h4>
+                  {selectedCourse.ressourcesUtiles?.map((ressource) => (
+                        <RessourcesUtiles 
+                          linkTitle={ressource.linkTitle} 
+                          linkUrl={ressource.linkUrl} 
+                          type={ressource.type} 
+                        />
+                  ))}
+                </div>
+
+              ) : ''}
+              
+
+              {selectedCourse.lesson?.map((lesson) => (
+                    <Lesson 
+                      name={lesson.name} 
+                      lessonLink={lesson.lessonLink}
+                      pdfLink={lesson.pdfLink}
+                      type={lesson.type}
+                      publishedAt={lesson.publishedAt}
+                    />
+              ))}
+
+              <hr className="w-40 border-2 mx-auto my-16 bg-gris-contour text-gris-contour"/>
+              
+          </div>
+          ) : null}   
       </div>
 
       </Layout>
@@ -184,6 +213,9 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
           _id,
           name,
           "slug":  slug.current,
+          ressourcesUtiles,
+          lesson,
+          category,
         }
         
       }
