@@ -100,7 +100,7 @@ export type Ressources = {
   _id?: string;
   linkTitle?: string;
   linkUrl?: string;
-  type?: 'pdf' | 'anki' | 'quizlet' | 'schema';
+  type?: 'pdf' | 'vocabulaire' | 'schema';
 
 }
 

@@ -1,12 +1,12 @@
 import React from 'react'
-import { CoursDetails, Ressources } from '../../typings'
+import { Ressources } from '../../typings'
 
 type Props = {}
 
 export default function RessourcesUtiles({linkTitle, linkUrl, type}: Ressources) {
   return (
     <div>
-        {type == 'pdf' && <div className='flex flex-col items-center justify-center text-center mt-4'>
+        {type == 'pdf' && <div className='flex flex-col items-center justify-center text-center mt-4 mb-2.5'>
         
           <a href={linkUrl} target="_blank" rel="noopener noreferrer" className='flex flex-col items-center justify-center text-center'>
             <svg width="60" height="80" viewBox="0 0 60 80" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -16,6 +16,45 @@ export default function RessourcesUtiles({linkTitle, linkUrl, type}: Ressources)
             </svg>
 
             <p className='bold text-gris-foncé underline pt-3'>{linkTitle}</p>
+          
+          </a>
+        
+        </div>}
+
+        {type == 'vocabulaire' && <div className='flex items-center justify-center text-center mt-4 border-3 border-gris-contour py-3 bg-white w-52 m-auto'>
+        
+          <a href={linkUrl} target="_blank" rel="noopener noreferrer" className='flex items-center'>
+
+            <p className='bold text-gris-foncé underline pr-2'>Vocabulaire {linkTitle}</p>
+            
+            <svg className='' width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.0625 11.5L0 10.4375L8.9375 1.5H4V0H11.5V7.5H10V2.5625L1.0625 11.5Z" fill="#424242"/>
+            </svg>
+
+
+
+          
+          </a>
+        
+        </div>}
+
+        {type == 'schema' && <div className='flex flex-col items-center justify-center text-center mt-4'>
+        
+          <a href={linkUrl} target="_blank" rel="noopener noreferrer" className='flex flex-col items-center justify-center text-center'>
+            <svg width="51" height="57" viewBox="0 0 51 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M24.9992 56.0922C22.3866 56.0922 20.1785 55.1903 18.3751 53.3865C16.5716 51.5826 15.6699 49.3745 15.6699 46.762C15.6699 44.4257 16.4152 42.3976 17.9058 40.6776C19.3963 38.9575 21.268 37.9231 23.5209 37.5741V29.9792H7.25006V19.3406H0.138672V2.15946H17.3198V19.3406H10.2084V27.0209H39.7917V19.1984C37.5389 18.8494 35.6671 17.8149 34.1766 16.0949C32.686 14.3749 31.9408 12.3468 31.9408 10.0104C31.9408 7.39798 32.8427 5.18986 34.6467 3.38606C36.4507 1.58222 38.659 0.680298 41.2717 0.680298C43.8844 0.680298 46.0924 1.58222 47.8959 3.38606C49.6993 5.18986 50.601 7.39798 50.601 10.0104C50.601 12.3468 49.8558 14.3749 48.3652 16.0949C46.8747 17.8149 45.003 18.8494 42.7501 19.1984V29.9792H26.4792V37.5741C28.7321 37.9231 30.6038 38.9575 32.0944 40.6776C33.5849 42.3976 34.3302 44.4257 34.3302 46.762C34.3302 49.3745 33.4282 51.5826 31.6242 53.3865C29.8202 55.1903 27.6119 56.0922 24.9992 56.0922ZM41.2829 16.3822C43.0461 16.3822 44.5469 15.759 45.7852 14.5127C47.0235 13.2663 47.6427 11.7615 47.6427 9.99838C47.6427 8.23522 47.0195 6.73445 45.7731 5.4961C44.5268 4.25779 43.022 3.63863 41.2588 3.63863C39.4957 3.63863 37.9949 4.26183 36.7566 5.50822C35.5183 6.75457 34.8991 8.25933 34.8991 10.0225C34.8991 11.7857 35.5223 13.2864 36.7687 14.5247C38.015 15.7631 39.5198 16.3822 41.2829 16.3822ZM3.097 16.3822H14.3614V5.1178H3.097V16.3822ZM25.0121 53.1338C26.7753 53.1338 28.276 52.5106 29.5143 51.2642C30.7527 50.0179 31.3719 48.5131 31.3719 46.75C31.3719 44.9868 30.7487 43.4861 29.5023 42.2478C28.2559 41.0094 26.7512 40.3902 24.988 40.3902C23.2248 40.3902 21.7241 41.0134 20.4858 42.2598C19.2474 43.5062 18.6283 45.011 18.6283 46.7741C18.6283 48.5373 19.2514 50.038 20.4978 51.2764C21.7442 52.5147 23.2489 53.1338 25.0121 53.1338Z" fill="#C3CFD9"/>
+            </svg>
+
+
+            <div className='flex items-center'>
+              
+              <p className='bold text-gris-foncé underline pt-3 pr-2'>{linkTitle}</p>
+              <svg className='mt-3' width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.0625 11.5L0 10.4375L8.9375 1.5H4V0H11.5V7.5H10V2.5625L1.0625 11.5Z" fill="#424242"/>
+              </svg>
+  
+            </div>
+
           
           </a>
         
