@@ -21,40 +21,67 @@ interface LessonProgress {
   [lessonName: string]: string;
 }
 
+interface ChapterProgress {
+  [chapterName: string]: LessonProgress;
+}
+
 
 const Page = ({programme}: Props) => {
 
 
   /*Affichage des cours dynamiques*/
   const [selectedCourse, setSelectedCourse] = useState<CoursDetails | null>(null); // Specify the type
-  const [chapterProgress, setChapterProgress] = useState<{ [chapterName: string]: LessonProgress }>({});
+  const [chapterProgress, setChapterProgress] = useState<ChapterProgress>({});
 
+  const [currentChapterProgress, setCurrentChapterProgress] = useState<LessonProgress>({});
+
+
+  
   const handleCourseClick = (course: CoursDetails) => {
-  setSelectedCourse(course);
+    setSelectedCourse(course);
 
-  };
+    // Retrieve the progress for the selected chapter from localStorage
+    const chapterName = course.name; // Assuming the chapter name is used as the identifier
+    const storedProgress = localStorage.getItem(chapterName);
+
+    if (storedProgress) {
+      const parsedProgress = JSON.parse(storedProgress);
+      setCurrentChapterProgress(parsedProgress);
+    } else {
+      // If no progress is stored, initialize an empty progress object for the chapter
+      setCurrentChapterProgress({});
+    }
+};
+
+
 
   /*Logique de progression*/
   const [lessonProgress, setLessonProgress] = useState<LessonProgress>({});
 
   const handleLessonComplete = (lessonName: string) => {
-  // Mettre à jour l'état local
-  setLessonProgress((prevProgress: Record<string, string>) => ({
-    ...prevProgress,
-    [lessonName]: prevProgress[lessonName] === 'completed' ? 'incomplete' : 'completed',
-  }));
+    // Update the lesson progress for the current chapter
+    setCurrentChapterProgress((prevProgress) => ({
+      ...prevProgress,
+      [lessonName]: prevProgress[lessonName] === 'completed' ? 'incomplete' : 'completed',
+    }));
 
-  // Mettre à jour localStorage
-  localStorage.setItem('lessonProgress', JSON.stringify(lessonProgress));
+    // Update localStorage with the current chapter's progress
+    const chapterName = selectedCourse?.name; // Assuming the chapter name is used as the identifier
+    if (chapterName) {
+      localStorage.setItem(chapterName, JSON.stringify(currentChapterProgress));
+    }
 };
 
+
+
 useEffect(() => {
-  const storedProgress = localStorage.getItem('lessonProgress');
+  const storedProgress = localStorage.getItem(selectedCourse?.name || '');
 
   if (storedProgress) {
     setLessonProgress(JSON.parse(storedProgress));
   }
-}, []);
+}, [selectedCourse]);
+
 
 
 /*Calculer la progression */
@@ -224,10 +251,14 @@ useEffect(() => {
                     />
 
                     <input
-                        type='checkbox'
-                        checked={lessonProgress[lesson.name] === 'completed'}
-                        onChange={() => handleLessonComplete(lesson.name)}
-                      />
+                      type='checkbox'
+                      checked={lessonProgress[lesson.name] === 'completed'}
+                      onChange={() => {
+                        console.log('Checkbox clicked');
+                        handleLessonComplete(lesson.name);
+                      }}
+                    />
+
                 </div>
                     
               ))}
