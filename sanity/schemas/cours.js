@@ -44,7 +44,7 @@ export default defineType({
                 options: {
                   list: [
                     {title: 'Pdf', value: 'pdf'},
-                    {title: 'Vocabulaire', value: 'vocabulaire'},
+                    {title: 'Vocabulaire', value: 'vocab'},
                     {title: 'Schéma', value: 'schema'}
                   ], 
                   layout: 'radio' 

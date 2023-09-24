@@ -1,13 +1,14 @@
 import { GetStaticProps } from 'next';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PortableText from 'react-portable-text';
 import { sanityClient, urlFor } from '../../../client/sanity';
 
 import Layout from '../../../components/Layout';
 import { CoursDetails, Programme } from '../../../typings';
-import RessourcesUtiles from '../../../components/programme/RessourcesUtiles';
 import Lesson from '../../../components/programme/Lesson';
 import RetrouveLesCours from '../../../components/programme/RetrouveLesCours';
+import Pdf from '../../../components/programme/Pdf';
+import Vocab from '../../../components/programme/Vocab';
 
 
 
@@ -16,15 +17,56 @@ interface Props {
     programme: Programme;
 }
 
+interface LessonProgress {
+  [lessonName: string]: string;
+}
+
 
 const Page = ({programme}: Props) => {
 
+
+  /*Affichage des cours dynamiques*/
   const [selectedCourse, setSelectedCourse] = useState<CoursDetails | null>(null); // Specify the type
+  const [chapterProgress, setChapterProgress] = useState<{ [chapterName: string]: LessonProgress }>({});
 
   const handleCourseClick = (course: CoursDetails) => {
   setSelectedCourse(course);
 
   };
+
+  /*Logique de progression*/
+  const [lessonProgress, setLessonProgress] = useState<LessonProgress>({});
+
+  const handleLessonComplete = (lessonName: string) => {
+  // Mettre à jour l'état local
+  setLessonProgress((prevProgress: Record<string, string>) => ({
+    ...prevProgress,
+    [lessonName]: prevProgress[lessonName] === 'completed' ? 'incomplete' : 'completed',
+  }));
+
+  // Mettre à jour localStorage
+  localStorage.setItem('lessonProgress', JSON.stringify(lessonProgress));
+};
+
+useEffect(() => {
+  const storedProgress = localStorage.getItem('lessonProgress');
+
+  if (storedProgress) {
+    setLessonProgress(JSON.parse(storedProgress));
+  }
+}, []);
+
+
+/*Calculer la progression */
+  const totalLessons = selectedCourse?.lesson?.length || 1; // Éviter la division par zéro
+  const completedLessons = Object.values(lessonProgress).filter(
+    (progress) => progress === 'completed'
+  ).length;
+
+  const globalProgress = (completedLessons / totalLessons) * 100;
+
+
+
   
   return (
     <div>
@@ -95,8 +137,9 @@ const Page = ({programme}: Props) => {
             <p className='petit-texte bold mb-2'>Progression globale :</p>
             <div className='flex items-center'>
                 
-                <progress id="file" max="100" value="50" className='progress_bar'/> 
-                <p className='pl-2'>50%</p>
+                <progress id='file' max='100' value={globalProgress} className='progress_bar' />
+                <p className='pl-2'>{globalProgress.toFixed(2)}%</p>
+
   
             </div>
           </div>
@@ -128,8 +171,8 @@ const Page = ({programme}: Props) => {
 
               <div className='flex items-center mb-10'>
                 
-                <progress id="file" max="100" value="50" className='progress_bar'/> 
-                <p className='pl-2'>50%</p>
+                <progress id='file' max='100' value={globalProgress} className='progress_bar' />
+                <p className='pl-2'>{globalProgress.toFixed(2)}%</p>
   
               </div>
 
@@ -139,25 +182,54 @@ const Page = ({programme}: Props) => {
                 <div className='mb-16 py-7 px-6 bg-gris-clair'>
                   <h4 className='petit-titre'>📚Ressources utiles</h4>
                   {selectedCourse.ressourcesUtiles?.map((ressource) => (
-                        <RessourcesUtiles 
+                    <div>
+                      <Pdf 
                           linkTitle={ressource.linkTitle} 
                           linkUrl={ressource.linkUrl} 
                           type={ressource.type} 
                         />
+                      
+                      
+                      <div className='flex justify-center items-center'>
+
+                          {ressource.type == 'vocab' && (
+
+                          <Vocab 
+                            linkTitle={ressource.linkTitle} 
+                            linkUrl={ressource.linkUrl} 
+                          />
+                          
+                          )}
+                          
+
+                      </div>                        
+                    </div>
+                      
                   ))}
+
+                
                 </div>
 
               ) : ''}
-              
 
               {selectedCourse.lesson?.map((lesson) => (
-                    <Lesson 
+                <div className='flex'>
+
+                  <Lesson 
                       name={lesson.name} 
                       lessonLink={lesson.lessonLink}
                       pdfLink={lesson.pdfLink}
                       type={lesson.type}
                       publishedAt={lesson.publishedAt}
                     />
+
+                    <input
+                        type='checkbox'
+                        checked={lessonProgress[lesson.name] === 'completed'}
+                        onChange={() => handleLessonComplete(lesson.name)}
+                      />
+                </div>
+                    
               ))}
 
               <hr className="w-40 border-2 mx-auto my-16 bg-gris-contour text-gris-contour"/>

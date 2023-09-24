@@ -86,7 +86,7 @@ type Cours = {
 
 export interface CoursDetails {
   _id : string;
-  name?: string;
+  name: string;
   slug: {
         current: string;
   };
@@ -100,7 +100,7 @@ export type Ressources = {
   _id?: string;
   linkTitle?: string;
   linkUrl?: string;
-  type?: 'pdf' | 'vocabulaire' | 'schema';
+  type?: 'pdf' | 'vocab' | 'schema';
 
 }
 
