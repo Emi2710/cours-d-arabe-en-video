@@ -1,10 +1,10 @@
 import React from 'react'
-import { Lesson } from '../../typings'
+import { LessonType } from '../../typings'
 import Link from 'next/link'
 
 type Props = {}
 
-export default function Lesson({name, lessonLink, pdfLink, type, publishedAt}: Lesson) {
+export default function Lesson({name, lessonLink, pdfLink, type, publishedAt}: LessonType) {
   return (
     <div>
 

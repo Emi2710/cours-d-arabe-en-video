@@ -78,6 +78,7 @@ type Cours = {
   slug: {
         current: string;
   };
+  lesson: LessonType[];
 
 }
 
@@ -91,7 +92,7 @@ export interface CoursDetails {
         current: string;
   };
   ressourcesUtiles?: Ressources[];
-  lesson?: Lesson[];
+  lesson: LessonType[];
   category?: string;
   
 }
@@ -104,7 +105,7 @@ export type Ressources = {
 
 }
 
-export type Lesson = {
+export type LessonType = {
   name: string;
   lessonLink: string;
   pdfLink?: string;

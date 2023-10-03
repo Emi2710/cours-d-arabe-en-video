@@ -4,7 +4,7 @@ import PortableText from 'react-portable-text';
 import { sanityClient, urlFor } from '../../../client/sanity';
 
 import Layout from '../../../components/Layout';
-import { CoursDetails, Programme } from '../../../typings';
+import { CoursDetails, LessonType, Programme } from '../../../typings';
 import Lesson from '../../../components/programme/Lesson';
 import RetrouveLesCours from '../../../components/programme/RetrouveLesCours';
 import Pdf from '../../../components/programme/Pdf';
@@ -21,9 +21,9 @@ interface LessonProgress {
   [lessonName: string]: string;
 }
 
-interface ChapterProgress {
-  [chapterName: string]: LessonProgress;
-}
+
+
+
 
 
 const Page = ({programme}: Props) => {
@@ -31,11 +31,11 @@ const Page = ({programme}: Props) => {
 
   /*Affichage des cours dynamiques*/
   const [selectedCourse, setSelectedCourse] = useState<CoursDetails | null>(null); // Specify the type
-  const [chapterProgress, setChapterProgress] = useState<ChapterProgress>({});
 
   const [currentChapterProgress, setCurrentChapterProgress] = useState<LessonProgress>({});
 
-
+  // Add a state variable to track whether all lessons in the chapter are completed
+  const [allLessonsCompleted, setAllLessonsCompleted] = useState(false);
   
   const handleCourseClick = (course: CoursDetails) => {
     setSelectedCourse(course);
@@ -102,6 +102,35 @@ useEffect(() => {
 
   const globalProgress = (completedLessons / totalLessons) * 100;
 
+
+
+// Create a function to handle the checkbox state change
+const handleAllLessonsCompleteToggle = () => {
+  // Check if all lessons are already marked as completed
+  const isAllCompleted = Object.values(lessonProgress).every(progress => progress === 'completed');
+  
+  // If all lessons are already completed, set them all to incomplete; otherwise, mark them as completed
+  const updatedLessonProgress: LessonProgress = { ...currentChapterProgress };
+
+  for (const lesson of selectedCourse?.lesson || []) {
+  updatedLessonProgress[lesson.name] = isAllCompleted ? 'incomplete' : 'completed';
+}
+
+
+  // Update localStorage with the new lesson progress
+  if (selectedCourse) {
+  const chapterName = selectedCourse.name;
+  if (chapterName) {
+    localStorage.setItem(chapterName, JSON.stringify(updatedLessonProgress));
+  }
+}
+
+
+  // Update the state variables
+  setLessonProgress(updatedLessonProgress);
+  setCurrentChapterProgress(updatedLessonProgress);
+  setAllLessonsCompleted(!isAllCompleted); // Toggle the checkbox state
+};
 
 
   
@@ -181,30 +210,43 @@ useEffect(() => {
             </div>
           </div>
 
-          {programme.cours? (
+          {programme.cours ? (
+            <div className='mx-5 mb-20'>
+              <div>
+                <h3 className='petit-titre mb-5'>Sommaire</h3>
+                <div></div>
+              </div>
 
-          <div className='mx-5 mb-20'>
-                      <div>
-                          <h3 className='petit-titre mb-5'>Sommaire</h3> 
-                          <div></div> 
-                      </div>
-                      
-                      <div>
-                        {programme.cours?.map((cours) => (
-                          <div className='flex justify-between' >
-                            <p className='cursor-pointer mb-3.5 text-gris-foncé underline bold' onClick={() => handleCourseClick(cours)}>{cours.name}</p>
-                            <p className='text-gris-contour'>0%</p>
-                          </div>
-                        ))}
-                      </div>
-                      
-          </div> 
+              <div>
+                {programme.cours?.map((cours) => {
+                  
+                  return (
+                  <div className='flex justify-between' key={cours.name}>
+                    <div>
+                      <p className='cursor-pointer mb-3.5 text-gris-foncé underline bold' onClick={() => handleCourseClick(cours)}>
+                        {cours.name}
+                      </p>
+                    </div>
+                  </div>
+                )
+                
+                })}
+              </div>
+            </div>
+          ) : ''}
 
-          ): ''}
+
 
           {selectedCourse ? (
           <div className='mx-5'>
-              <h3 className="petit-titre mb-3">{selectedCourse.name}</h3>
+              <h3 className="petit-titre mb-3">{selectedCourse?.name}</h3>
+              <div className='flex items-center mb-10'>
+              <input
+                type='checkbox'
+                checked={allLessonsCompleted}
+                onChange={handleAllLessonsCompleteToggle}
+              />
+            </div>
 
               <div className='flex items-center mb-10'>
                 
