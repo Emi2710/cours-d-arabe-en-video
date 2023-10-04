@@ -402,22 +402,44 @@ const renderOrderByPublicationView = () => {
 
           <div>
         {/* Button to toggle between default and publication order */}
-        <button onClick={() => setShowOrderByPublication(false)}>Afficher par défaut</button>
-        <button onClick={() => setShowOrderByPublication(true)}>Afficher par ordre de publication</button>
+        <button onClick={() => setShowOrderByPublication(!showOrderByPublication)}>
+          {showOrderByPublication ? 'Afficher par défaut' : 'Afficher par ordre de publication'}
+        </button>
 
         {/* Render lessons based on the selected view */}
         {showOrderByPublication
-          ? sortedLessons.map((lesson) => (
-              <Lesson
-                key={lesson.name}
-                name={lesson.name}
-                lessonLink={lesson.lessonLink}
-                pdfLink={lesson.pdfLink}
-                type={lesson.type}
-                publishedAt={lesson.publishedAt}
-              />
-            ))
+          ? sortedLessons.map((lesson) => {
+              // Function to find the parent course of the lesson
+              const findParentCourse = () => {
+                for (const course of programme.cours) {
+                  if (
+                    course.lesson &&
+                    course.lesson.some((coursLesson) => coursLesson.name === lesson.name)
+                  ) {
+                    return course.name; // Return the course name as the chapter name
+                  }
+                }
+                return ''; // Default to an empty string if no parent course is found
+              };
+
+              const chapterName = findParentCourse(); // Get the chapter name dynamically
+
+              return (
+                <div key={lesson.name}>
+                  <h3>{chapterName}</h3>
+                  <Lesson
+                    key={lesson.name}
+                    name={lesson.name}
+                    lessonLink={lesson.lessonLink}
+                    pdfLink={lesson.pdfLink}
+                    type={lesson.type}
+                    publishedAt={lesson.publishedAt}
+                  />
+                </div>
+              );
+            })
           : renderDefaultView()}
+
       </div>  
         </div>
 
