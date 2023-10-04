@@ -110,7 +110,7 @@ export type LessonType = {
   lessonLink: string;
   pdfLink?: string;
   type?: 'lesson' | 'exam';
-  publishedAt?: Date;
+  publishedAt: Date;
 }
 
 

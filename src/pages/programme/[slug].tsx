@@ -133,6 +133,85 @@ const handleAllLessonsCompleteToggle = () => {
 };
 
 
+/* SYSTEME DE TRI DES COURS */
+
+const [showDefaultView, setShowDefaultView] = useState(true);
+const [showOrderByPublication, setShowOrderByPublication] = useState(false);
+
+const renderDefaultView = () => {
+
+  console.log('Rendering default view');
+  return (
+    <div>
+      {programme.cours.map((cours) => (
+        <div key={cours._id}>
+          <h3>{cours.name}</h3>
+          {cours.lesson?.map((lesson) => (
+            <Lesson
+              key={lesson.name}
+              name={lesson.name}
+              lessonLink={lesson.lessonLink}
+              pdfLink={lesson.pdfLink}
+              type={lesson.type}
+              publishedAt={lesson.publishedAt}
+            />
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+const renderOrderByPublicationView = () => {
+
+  console.log('Rendering orderByPublication view');
+
+  return (
+    <div>
+      {programme.cours.map((cours) => (
+        <div key={cours._id}>
+          <h3>{cours.name}</h3>
+          {cours.lesson && Array.isArray(cours.lesson) ? (
+            cours.lesson
+              .slice()
+              .sort((a, b) => new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime())
+              .map((lesson) => (
+                <Lesson
+                  key={lesson.name}
+                  name={lesson.name}
+                  lessonLink={lesson.lessonLink}
+                  pdfLink={lesson.pdfLink}
+                  type={lesson.type}
+                  publishedAt={lesson.publishedAt}
+                />
+              ))
+          ) : (
+            <p>No lessons available.</p>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+// Flatten the lessons from all chapters into a single array
+  const allLessons: LessonType[] = programme.cours.reduce((acc: LessonType[], cours) => {
+  if (cours.lesson && Array.isArray(cours.lesson)) {
+    acc.push(...cours.lesson.map((lesson) => ({ ...lesson, chapterName: cours.name })));
+  }
+  return acc;
+}, []);
+
+
+  // Sort the lessons based on their publication date
+  const sortedLessons = allLessons
+    .filter((lesson) => lesson.publishedAt) // Filter out lessons with no publication date
+    .sort((a, b) => new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime());
+
+
+
+
+
   
   return (
     <div>
@@ -318,8 +397,29 @@ const handleAllLessonsCompleteToggle = () => {
               <hr className="w-40 border-2 mx-auto my-16 bg-gris-contour text-gris-contour"/>
               
           </div>
-          ) : null}   
-      </div>
+          ) : null} 
+
+
+          <div>
+        {/* Button to toggle between default and publication order */}
+        <button onClick={() => setShowOrderByPublication(false)}>Afficher par défaut</button>
+        <button onClick={() => setShowOrderByPublication(true)}>Afficher par ordre de publication</button>
+
+        {/* Render lessons based on the selected view */}
+        {showOrderByPublication
+          ? sortedLessons.map((lesson) => (
+              <Lesson
+                key={lesson.name}
+                name={lesson.name}
+                lessonLink={lesson.lessonLink}
+                pdfLink={lesson.pdfLink}
+                type={lesson.type}
+                publishedAt={lesson.publishedAt}
+              />
+            ))
+          : renderDefaultView()}
+      </div>  
+        </div>
 
       </Layout>
       
