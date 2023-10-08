@@ -2,6 +2,7 @@ import { GetStaticProps } from 'next';
 import React, { useEffect, useState } from 'react'
 import PortableText from 'react-portable-text';
 import { sanityClient, urlFor } from '../../../client/sanity';
+import Link from 'next/link'
 
 import Layout from '../../../components/Layout';
 import { CoursDetails, LessonType, Programme } from '../../../typings';
@@ -21,11 +22,7 @@ interface Props {
 const Page = ({programme}: Props) => {
 
 
-  /* AFFICHAGE DYNAMIQUE DES COURS */
-  const [selectedCourse, setSelectedCourse] = useState<CoursDetails | null>(null); // Specify the type
   
-  const handleCourseClick = (course: CoursDetails) => {
-    setSelectedCourse(course);};
 
     
 
@@ -89,7 +86,24 @@ const Page = ({programme}: Props) => {
 
 /* SYSTEME DE TRI DES COURS */
 
-const [showOrderByPublication, setShowOrderByPublication] = useState(false);
+// État local pour stocker la préférence de l'utilisateur
+  // État local pour stocker la préférence de l'utilisateur
+  const [showOrderByPublication, setShowOrderByPublication] = useState(false);
+
+  // Utilisez useEffect pour sauvegarder la préférence de l'utilisateur dans localStorage
+  useEffect(() => {
+    // Vérifiez si localStorage est disponible (côté client)
+    if (typeof window !== 'undefined') {
+      const storedPreference = localStorage.getItem('showOrderByPublication');
+      if (storedPreference !== null) {
+        // Convertissez la chaîne en booléen
+        setShowOrderByPublication(storedPreference === 'true');
+      }
+    }
+  }, []);
+
+  
+
 
 const renderDefaultView = () => {
 
@@ -99,9 +113,9 @@ const renderDefaultView = () => {
       {programme.cours.map((cours) => (
         <div key={cours._id}>
 
-          <div>
+          <div className='flex'>
             
-            <h3>
+            <h3 className="petit-titre mb-3" id={cours.slug}>
               {cours.name}
             </h3>
             <input
@@ -111,10 +125,48 @@ const renderDefaultView = () => {
             />
   
           </div>
-          <div>
+          <div className='flex items-center mb-10'>
             <progress id='file' max='100' value={calculateChapterProgress(cours.name)} className='progress_bar' />
                 <p className='pl-2'>{calculateChapterProgress(cours.name)}%</p>
           </div>
+
+          {cours.ressourcesUtiles ? (
+            <div className='mb-16 py-7 px-6 bg-gris-clair'>
+                  <h4 className='petit-titre'>📚Ressources utiles</h4>
+                  {cours.ressourcesUtiles?.map((ressource) => (
+                    <div>
+                      <Pdf 
+                          linkTitle={ressource.linkTitle} 
+                          linkUrl={ressource.linkUrl} 
+                          type={ressource.type} 
+                        />
+                      
+                      
+                      <div className='flex justify-center items-center'>
+
+                          {ressource.type == 'vocab' && (
+
+                          <Vocab 
+                            linkTitle={ressource.linkTitle} 
+                            linkUrl={ressource.linkUrl} 
+                          />
+                          
+                          )}
+                          
+
+                      </div>                        
+                    </div>
+                      
+                  ))}
+
+                
+                </div>
+
+          ) : ''}
+
+          
+      
+
           {cours.lesson?.map((lesson) => (
             <div className='flex'>
 
@@ -201,6 +253,10 @@ const calculateGlobalProgress = () => {
   const progress = Math.round((totalCompletedLessons / totalLessons) * 100);
   return progress.toString(); // Convertit le nombre en chaîne de caractères
 };
+
+/* CONTROLER L'AFFICHE DES RESSOURCES UTILES DANS LA BOUCLE DES COURS PUBLIES SELON LEUR DATE DE PUBLICATION */
+
+const [displayedChapterRessources, setDisplayedChapterRessources] = useState<string[]>([]);
 
 
 
@@ -293,9 +349,18 @@ const calculateGlobalProgress = () => {
                   return (
                   <div className='flex justify-between' key={cours.name}>
                     <div>
-                      <p className='cursor-pointer mb-3.5 text-gris-foncé underline bold' onClick={() => handleCourseClick(cours)}>
-                        {cours.name}
-                      </p>
+                      <Link href={`#${cours.slug}`} onClick={() => {
+                        
+                        setShowOrderByPublication(false);
+                        // Sauvegardez la préférence de l'utilisateur dans localStorage
+                        localStorage.setItem('showOrderByPublication', JSON.stringify(false));
+                      }}>
+
+                        <p className='cursor-pointer mb-3.5 text-gris-foncé underline bold'>
+                          {cours.name}
+                        </p>  
+                      </Link>
+                      
                     </div>
                   </div>
                 )
@@ -306,95 +371,18 @@ const calculateGlobalProgress = () => {
           ) : ''}
 
 
-
-          {selectedCourse ? (
-          <div className='mx-5'>
-              <h3 className="petit-titre mb-3">{selectedCourse?.name}</h3>
-              <div className='flex items-center mb-10'>
-                <input
-                  type='checkbox'
-                  checked={chapterCompletion[selectedCourse.name]?.length === selectedCourse.lesson?.length}
-                  onChange={(e) => handleChapterCheckboxChange(selectedCourse.name, e.target.checked)}
-                />
-              </div>
-
-              <div className='flex items-center mb-10'>
-                
-                <progress id='file' max='100' value={calculateChapterProgress(selectedCourse.name)} className='progress_bar' />
-                <p className='pl-2'>{calculateChapterProgress(selectedCourse.name)}%</p>
-  
-              </div>
-
-
-              {selectedCourse.ressourcesUtiles? (
-
-                <div className='mb-16 py-7 px-6 bg-gris-clair'>
-                  <h4 className='petit-titre'>📚Ressources utiles</h4>
-                  {selectedCourse.ressourcesUtiles?.map((ressource) => (
-                    <div>
-                      <Pdf 
-                          linkTitle={ressource.linkTitle} 
-                          linkUrl={ressource.linkUrl} 
-                          type={ressource.type} 
-                        />
-                      
-                      
-                      <div className='flex justify-center items-center'>
-
-                          {ressource.type == 'vocab' && (
-
-                          <Vocab 
-                            linkTitle={ressource.linkTitle} 
-                            linkUrl={ressource.linkUrl} 
-                          />
-                          
-                          )}
-                          
-
-                      </div>                        
-                    </div>
-                      
-                  ))}
-
-                
-                </div>
-
-              ) : ''}
-
-              {selectedCourse.lesson?.map((lesson) => (
-                <div className='flex'>
-
-                  <Lesson 
-                      name={lesson.name} 
-                      lessonLink={lesson.lessonLink}
-                      pdfLink={lesson.pdfLink}
-                      type={lesson.type}
-                      publishedAt={lesson.publishedAt}
-                    />
-
-                    <input
-                      type='checkbox'
-                      checked={chapterCompletion[selectedCourse.name]?.includes(lesson.name) || false}
-                      onChange={(e) => handleCheckboxChange(selectedCourse.name, lesson.name, e.target.checked)}
-                    />
-
-                    
-
-                </div>
-                    
-              ))}
-
-              <hr className="w-40 border-2 mx-auto my-16 bg-gris-contour text-gris-contour"/>
-              
-          </div>
-          ) : null} 
-
-
           <div>
         {/* Button to toggle between default and publication order */}
-        <button onClick={() => setShowOrderByPublication(!showOrderByPublication)}>
-          {showOrderByPublication ? 'Afficher par défaut' : 'Afficher par ordre de publication'}
-        </button>
+          <button onClick={() => {
+            const newValue = !showOrderByPublication;
+            // Mettez à jour l'état local
+            setShowOrderByPublication(newValue);
+            // Sauvegardez la préférence de l'utilisateur dans localStorage
+            localStorage.setItem('showOrderByPublication', JSON.stringify(newValue));
+          }}>
+            {showOrderByPublication ? 'Afficher par défaut' : 'Afficher par ordre de publication'}
+          </button>
+
 
         {/* Render lessons based on the selected view */}
           {showOrderByPublication
@@ -420,12 +408,26 @@ const calculateGlobalProgress = () => {
                 // Update the previousChapterName with the current chapter name
                 previousChapterName = chapterName;
 
+                const findParentRessources = () => {
+                  for (const course of programme.cours) {
+                    if (
+                      course.lesson &&
+                      course.lesson.some((coursLesson) => coursLesson.name === lesson.name)
+                    ) {
+                      return course.ressourcesUtiles; // Return the course name as the chapter name
+                    }
+                  }
+                  return ''; // Default to an empty string if no parent course is found
+                };
+
+                const chapterRessource = findParentRessources();
+
                 return (
                   <div key={lesson.name}>
                     {/* Afficher le nom du chapitre uniquement s'il est différent du précédent */}
                     {isDifferentChapter && <div>
-                      <div>
-                        <h3>{chapterName}</h3>
+                      <div className='flex items-center'>
+                        <h3 className="petit-titre mb-3">{chapterName}</h3>
                         <input
                           type='checkbox'
                           checked={
@@ -438,12 +440,49 @@ const calculateGlobalProgress = () => {
                         />  
                       </div>
 
-                      <div>
+                      <div className='flex items-center mb-10'>
                         <progress id='file' max='100' value={calculateChapterProgress(chapterName)} className='progress_bar' />
                         <p className='pl-2'>{calculateChapterProgress(chapterName)}%</p>
                       </div>
+
+                      {chapterRessource? (
+
+                        <div className='mb-16 py-7 px-6 bg-gris-clair'>
+                          <h4 className='petit-titre'>📚Ressources utiles</h4>
+                          {chapterRessource?.map((ressource) => (
+                            <div>
+                              <Pdf 
+                                  linkTitle={ressource.linkTitle} 
+                                  linkUrl={ressource.linkUrl} 
+                                  type={ressource.type} 
+                                />
+                              
+                              
+                              <div className='flex justify-center items-center'>
+
+                                  {ressource.type == 'vocab' && (
+
+                                  <Vocab 
+                                    linkTitle={ressource.linkTitle} 
+                                    linkUrl={ressource.linkUrl} 
+                                  />
+                                  
+                                  )}
+                                  
+
+                              </div>                        
+                            </div>
+                              
+                          ))}
+
+                        
+                        </div>
+
+                      ) : ''}
                       
                       </div>}
+
+                    
                     <div className='flex'>
 
                       <Lesson
@@ -518,7 +557,7 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
         cours[] -> {
           _id,
           name,
-          "slug":  slug.current,
+          slug,
           ressourcesUtiles,
           lesson,
           category,
