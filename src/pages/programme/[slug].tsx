@@ -101,13 +101,19 @@ const renderDefaultView = () => {
 
           <div>
             
-            <h3>{cours.name}</h3>
+            <h3>
+              {cours.name}
+            </h3>
             <input
               type='checkbox'
               checked={chapterCompletion[cours.name]?.length === cours.lesson?.length}
               onChange={(e) => handleChapterCheckboxChange(cours.name, e.target.checked)}
             />
   
+          </div>
+          <div>
+            <progress id='file' max='100' value={calculateChapterProgress(cours.name)} className='progress_bar' />
+                <p className='pl-2'>{calculateChapterProgress(cours.name)}%</p>
           </div>
           {cours.lesson?.map((lesson) => (
             <div className='flex'>
@@ -155,6 +161,46 @@ const renderDefaultView = () => {
 
 
     let previousChapterName = ''; // Variable pour stocker le nom du chapitre précédent
+
+
+
+/* AFFICHER BARRE DE PROGRESSION A COTE DE CHAQUE CHAPITRE */
+
+const calculateChapterProgress = (chapterName: string) => {
+  const completedLessons = chapterCompletion[chapterName] || [];
+  const totalLessons = programme.cours
+    .find((cours) => cours.name === chapterName)?.lesson?.length || 0;
+  
+  if (totalLessons === 0) {
+    return '0';
+  }
+
+  const progress = Math.round((completedLessons.length / totalLessons) * 100);
+  return progress.toString(); // Convertit le nombre en chaîne de caractères
+};
+
+
+/* AFFICHER LA PROGRESSION GLOBALE */
+
+const calculateGlobalProgress = () => {
+  let totalCompletedLessons = 0;
+  let totalLessons = 0;
+
+  programme.cours.forEach((cours) => {
+    const chapterCompletedLessons = chapterCompletion[cours.name] || [];
+    const chapterTotalLessons = cours.lesson?.length || 0;
+
+    totalCompletedLessons += chapterCompletedLessons.length;
+    totalLessons += chapterTotalLessons;
+  });
+
+  if (totalLessons === 0) {
+    return '0';
+  }
+
+  const progress = Math.round((totalCompletedLessons / totalLessons) * 100);
+  return progress.toString(); // Convertit le nombre en chaîne de caractères
+};
 
 
 
@@ -225,13 +271,12 @@ const renderDefaultView = () => {
           <hr className="w-40 border-2 mx-auto my-16 bg-gris-contour text-gris-contour"/>
 
           <div className='flex flex-col items-center justify-center mb-16 p-4 border-3 border-gris-contour mx-5 rounded-[100px]'>
-            <p className='petit-texte bold mb-2'>Progression globale :</p>
-            <div className='flex items-center'>
-                
-                {/*<progress id='file' max='100' value={globalProgress} className='progress_bar' />
-                <p className='pl-2'>{globalProgress.toFixed(2)}%</p>*/}
-
-  
+            <div className='flex items-center mb-10'>
+              <p className='petit-texte bold mb-2'>Progression globale :</p>
+              <div className='flex items-center'>
+                <progress id='file' max='100' value={calculateGlobalProgress()} className='progress_bar' />
+                <p className='pl-2'>{calculateGlobalProgress()}%</p>
+              </div>
             </div>
           </div>
 
@@ -275,8 +320,8 @@ const renderDefaultView = () => {
 
               <div className='flex items-center mb-10'>
                 
-                {/*<progress id='file' max='100' value={globalProgress} className='progress_bar' />
-                <p className='pl-2'>{globalProgress.toFixed(2)}%</p>*/}
+                <progress id='file' max='100' value={calculateChapterProgress(selectedCourse.name)} className='progress_bar' />
+                <p className='pl-2'>{calculateChapterProgress(selectedCourse.name)}%</p>
   
               </div>
 
@@ -379,18 +424,25 @@ const renderDefaultView = () => {
                   <div key={lesson.name}>
                     {/* Afficher le nom du chapitre uniquement s'il est différent du précédent */}
                     {isDifferentChapter && <div>
+                      <div>
+                        <h3>{chapterName}</h3>
+                        <input
+                          type='checkbox'
+                          checked={
+                            chapterCompletion[chapterName]?.length ===
+                            programme.cours
+                              .find((cours) => cours.name === chapterName)
+                              ?.lesson?.length
+                          }
+                          onChange={(e) => handleChapterCheckboxChange(chapterName, e.target.checked)}
+                        />  
+                      </div>
+
+                      <div>
+                        <progress id='file' max='100' value={calculateChapterProgress(chapterName)} className='progress_bar' />
+                        <p className='pl-2'>{calculateChapterProgress(chapterName)}%</p>
+                      </div>
                       
-                      <h3>{chapterName}</h3>
-                      <input
-                        type='checkbox'
-                        checked={
-                          chapterCompletion[chapterName]?.length ===
-                          programme.cours
-                            .find((cours) => cours.name === chapterName)
-                            ?.lesson?.length
-                        }
-                        onChange={(e) => handleChapterCheckboxChange(chapterName, e.target.checked)}
-                      />
                       </div>}
                     <div className='flex'>
 
