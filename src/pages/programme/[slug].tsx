@@ -17,125 +17,78 @@ interface Props {
     programme: Programme;
 }
 
-interface LessonProgress {
-  [lessonName: string]: string;
-}
-
-
-
-
-
 
 const Page = ({programme}: Props) => {
 
 
-  /*Affichage des cours dynamiques*/
+  /* AFFICHAGE DYNAMIQUE DES COURS */
   const [selectedCourse, setSelectedCourse] = useState<CoursDetails | null>(null); // Specify the type
-
-  const [currentChapterProgress, setCurrentChapterProgress] = useState<LessonProgress>({});
-
-  // Add a state variable to track whether all lessons in the chapter are completed
-  const [allLessonsCompleted, setAllLessonsCompleted] = useState(false);
   
   const handleCourseClick = (course: CoursDetails) => {
-    setSelectedCourse(course);
+    setSelectedCourse(course);};
 
-    // Retrieve the progress for the selected chapter from localStorage
-    const chapterName = course.name; // Assuming the chapter name is used as the identifier
-    const storedProgress = localStorage.getItem(chapterName);
+    
 
+  /* LOGIQUE DE PROGRESSION DES LECONS */
+
+  // État local pour stocker la progression de chaque chapitre
+  const [chapterCompletion, setChapterCompletion] = useState<{ [key: string]: string[] }>({});
+
+  useEffect(() => {
+    // Récupérer la progression de l'utilisateur depuis le localStorage
+    const storedProgress = localStorage.getItem('chapterCompletion');
     if (storedProgress) {
-      const parsedProgress = JSON.parse(storedProgress);
-      setCurrentChapterProgress(parsedProgress);
+      setChapterCompletion(JSON.parse(storedProgress));
+    }
+  }, []);
+
+  // Mettre à jour la progression de l'utilisateur lorsque la checkbox est cochée ou décochée
+  const handleCheckboxChange = (chapterName: string, lessonName: string, isCompleted: boolean) => {
+    // Copier l'état actuel de complétion
+    const updatedCompletion = { ...chapterCompletion };
+    // Vérifier si le chapitre existe déjà
+    if (!updatedCompletion[chapterName]) {
+      updatedCompletion[chapterName] = [];
+    }
+    // Mettre à jour la complétion de la leçon spécifiée
+    if (isCompleted) {
+      if (!updatedCompletion[chapterName].includes(lessonName)) {
+        updatedCompletion[chapterName].push(lessonName);
+      }
     } else {
-      // If no progress is stored, initialize an empty progress object for the chapter
-      setCurrentChapterProgress({});
+      const index = updatedCompletion[chapterName].indexOf(lessonName);
+      if (index !== -1) {
+        updatedCompletion[chapterName].splice(index, 1);
+      }
     }
-};
-
-
-
-  /*Logique de progression*/
-  const [lessonProgress, setLessonProgress] = useState<LessonProgress>({});
-
-  const handleLessonComplete = (lessonName: string) => {
-    // Update the lesson progress for the current chapter
-    const updatedLessonProgress = {
-      ...currentChapterProgress,
-      [lessonName]: currentChapterProgress[lessonName] === 'completed' ? 'incomplete' : 'completed',
-    };
-
-    // Update localStorage with the current chapter's progress
-    const chapterName = selectedCourse?.name; // Assuming the chapter name is used as the identifier
-    if (chapterName) {
-      localStorage.setItem(chapterName, JSON.stringify(updatedLessonProgress));
-    }
-
-    // Update the state with the new lesson progress
-    setLessonProgress(updatedLessonProgress);
-    setCurrentChapterProgress(updatedLessonProgress);
+    // Mettre à jour l'état local
+    setChapterCompletion(updatedCompletion);
+    // Sauvegarder la progression dans le localStorage
+    localStorage.setItem('chapterCompletion', JSON.stringify(updatedCompletion));
   };
 
+/* LOGIQUE DE PROGRESSION DES CHAPITRES */
 
-
-useEffect(() => {
-    const storedProgress = localStorage.getItem(selectedCourse?.name || '');
-
-    if (storedProgress) {
-      const parsedProgress = JSON.parse(storedProgress);
-      setLessonProgress(parsedProgress);
-      setCurrentChapterProgress(parsedProgress);
+  // Mettre à jour la progression de l'utilisateur lorsque la checkbox du chapitre est cochée ou décochée
+  const handleChapterCheckboxChange = (chapterName: string, isCompleted: boolean) => {
+    // Copier l'état actuel de complétion
+    const updatedCompletion = { ...chapterCompletion };
+    // Mettre à jour la complétion de toutes les leçons à l'intérieur du chapitre spécifié
+    if (isCompleted) {
+      updatedCompletion[chapterName] = programme.cours
+        .find((cours) => cours.name === chapterName)
+        ?.lesson?.map((lesson) => lesson.name) || [];
     } else {
-      // If no progress is stored, initialize an empty progress object for the chapter
-      setLessonProgress({});
-      setCurrentChapterProgress({});
+      updatedCompletion[chapterName] = [];
     }
-  }, [selectedCourse]);
-
-
-
-/*Calculer la progression */
-  const totalLessons = selectedCourse?.lesson?.length || 1; // Éviter la division par zéro
-  const completedLessons = Object.values(lessonProgress).filter(
-    (progress) => progress === 'completed'
-  ).length;
-
-  const globalProgress = (completedLessons / totalLessons) * 100;
-
-
-
-// Create a function to handle the checkbox state change
-const handleAllLessonsCompleteToggle = () => {
-  // Check if all lessons are already marked as completed
-  const isAllCompleted = Object.values(lessonProgress).every(progress => progress === 'completed');
-  
-  // If all lessons are already completed, set them all to incomplete; otherwise, mark them as completed
-  const updatedLessonProgress: LessonProgress = { ...currentChapterProgress };
-
-  for (const lesson of selectedCourse?.lesson || []) {
-  updatedLessonProgress[lesson.name] = isAllCompleted ? 'incomplete' : 'completed';
-}
-
-
-  // Update localStorage with the new lesson progress
-  if (selectedCourse) {
-  const chapterName = selectedCourse.name;
-  if (chapterName) {
-    localStorage.setItem(chapterName, JSON.stringify(updatedLessonProgress));
-  }
-}
-
-
-  // Update the state variables
-  setLessonProgress(updatedLessonProgress);
-  setCurrentChapterProgress(updatedLessonProgress);
-  setAllLessonsCompleted(!isAllCompleted); // Toggle the checkbox state
-};
-
+    // Mettre à jour l'état local
+    setChapterCompletion(updatedCompletion);
+    // Sauvegarder la progression dans le localStorage
+    localStorage.setItem('chapterCompletion', JSON.stringify(updatedCompletion));
+  };
 
 /* SYSTEME DE TRI DES COURS */
 
-const [showDefaultView, setShowDefaultView] = useState(true);
 const [showOrderByPublication, setShowOrderByPublication] = useState(false);
 
 const renderDefaultView = () => {
@@ -145,16 +98,38 @@ const renderDefaultView = () => {
     <div>
       {programme.cours.map((cours) => (
         <div key={cours._id}>
-          <h3>{cours.name}</h3>
+
+          <div>
+            
+            <h3>{cours.name}</h3>
+            <input
+              type='checkbox'
+              checked={chapterCompletion[cours.name]?.length === cours.lesson?.length}
+              onChange={(e) => handleChapterCheckboxChange(cours.name, e.target.checked)}
+            />
+  
+          </div>
           {cours.lesson?.map((lesson) => (
-            <Lesson
+            <div className='flex'>
+
+              <Lesson
               key={lesson.name}
               name={lesson.name}
               lessonLink={lesson.lessonLink}
               pdfLink={lesson.pdfLink}
               type={lesson.type}
               publishedAt={lesson.publishedAt}
-            />
+              />
+
+              <input
+                type='checkbox'
+                checked={chapterCompletion[cours.name]?.includes(lesson.name) || false}
+                onChange={(e) => handleCheckboxChange(cours.name, lesson.name, e.target.checked)}
+              />
+
+              
+            </div>
+            
           ))}
         </div>
       ))}
@@ -162,37 +137,7 @@ const renderDefaultView = () => {
   );
 };
 
-const renderOrderByPublicationView = () => {
 
-  console.log('Rendering orderByPublication view');
-
-  return (
-    <div>
-      {programme.cours.map((cours) => (
-        <div key={cours._id}>
-          <h3>{cours.name}</h3>
-          {cours.lesson && Array.isArray(cours.lesson) ? (
-            cours.lesson
-              .slice()
-              .sort((a, b) => new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime())
-              .map((lesson) => (
-                <Lesson
-                  key={lesson.name}
-                  name={lesson.name}
-                  lessonLink={lesson.lessonLink}
-                  pdfLink={lesson.pdfLink}
-                  type={lesson.type}
-                  publishedAt={lesson.publishedAt}
-                />
-              ))
-          ) : (
-            <p>No lessons available.</p>
-          )}
-        </div>
-      ))}
-    </div>
-  );
-};
 
 // Flatten the lessons from all chapters into a single array
   const allLessons: LessonType[] = programme.cours.reduce((acc: LessonType[], cours) => {
@@ -283,8 +228,8 @@ const renderOrderByPublicationView = () => {
             <p className='petit-texte bold mb-2'>Progression globale :</p>
             <div className='flex items-center'>
                 
-                <progress id='file' max='100' value={globalProgress} className='progress_bar' />
-                <p className='pl-2'>{globalProgress.toFixed(2)}%</p>
+                {/*<progress id='file' max='100' value={globalProgress} className='progress_bar' />
+                <p className='pl-2'>{globalProgress.toFixed(2)}%</p>*/}
 
   
             </div>
@@ -321,17 +266,17 @@ const renderOrderByPublicationView = () => {
           <div className='mx-5'>
               <h3 className="petit-titre mb-3">{selectedCourse?.name}</h3>
               <div className='flex items-center mb-10'>
-              <input
-                type='checkbox'
-                checked={allLessonsCompleted}
-                onChange={handleAllLessonsCompleteToggle}
-              />
-            </div>
+                <input
+                  type='checkbox'
+                  checked={chapterCompletion[selectedCourse.name]?.length === selectedCourse.lesson?.length}
+                  onChange={(e) => handleChapterCheckboxChange(selectedCourse.name, e.target.checked)}
+                />
+              </div>
 
               <div className='flex items-center mb-10'>
                 
-                <progress id='file' max='100' value={globalProgress} className='progress_bar' />
-                <p className='pl-2'>{globalProgress.toFixed(2)}%</p>
+                {/*<progress id='file' max='100' value={globalProgress} className='progress_bar' />
+                <p className='pl-2'>{globalProgress.toFixed(2)}%</p>*/}
   
               </div>
 
@@ -384,12 +329,11 @@ const renderOrderByPublicationView = () => {
 
                     <input
                       type='checkbox'
-                      checked={lessonProgress[lesson.name] === 'completed'}
-                      onChange={() => {
-                        console.log('Checkbox clicked');
-                        handleLessonComplete(lesson.name);
-                      }}
+                      checked={chapterCompletion[selectedCourse.name]?.includes(lesson.name) || false}
+                      onChange={(e) => handleCheckboxChange(selectedCourse.name, lesson.name, e.target.checked)}
                     />
+
+                    
 
                 </div>
                     
@@ -434,15 +378,40 @@ const renderOrderByPublicationView = () => {
                 return (
                   <div key={lesson.name}>
                     {/* Afficher le nom du chapitre uniquement s'il est différent du précédent */}
-                    {isDifferentChapter && <h3>{chapterName}</h3>}
-                    <Lesson
-                      key={lesson.name}
-                      name={lesson.name}
-                      lessonLink={lesson.lessonLink}
-                      pdfLink={lesson.pdfLink}
-                      type={lesson.type}
-                      publishedAt={lesson.publishedAt}
-                    />
+                    {isDifferentChapter && <div>
+                      
+                      <h3>{chapterName}</h3>
+                      <input
+                        type='checkbox'
+                        checked={
+                          chapterCompletion[chapterName]?.length ===
+                          programme.cours
+                            .find((cours) => cours.name === chapterName)
+                            ?.lesson?.length
+                        }
+                        onChange={(e) => handleChapterCheckboxChange(chapterName, e.target.checked)}
+                      />
+                      </div>}
+                    <div className='flex'>
+
+                      <Lesson
+                        key={lesson.name}
+                        name={lesson.name}
+                        lessonLink={lesson.lessonLink}
+                        pdfLink={lesson.pdfLink}
+                        type={lesson.type}
+                        publishedAt={lesson.publishedAt}
+                      />  
+
+                      <input
+                        type='checkbox'
+                        checked={chapterCompletion[chapterName]?.includes(lesson.name) || false}
+                        onChange={(e) => handleCheckboxChange(chapterName, lesson.name, e.target.checked)}
+                      />
+
+                      
+                    </div>
+                    
                   </div>
                 );
               })
