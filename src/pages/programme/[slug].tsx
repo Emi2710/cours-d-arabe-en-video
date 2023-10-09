@@ -388,19 +388,23 @@ const displayedChapters = new Set();
           {showOrderByPublication
             ? sortedLessons.map((lesson) => {
                 // Function to find the parent course of the lesson
-                const findParentCourse = () => {
+                const findParentCourse = (lessonName: string, lessonLink: string) => {
                   for (const course of programme.cours) {
                     if (
                       course.lesson &&
-                      course.lesson.some((coursLesson) => coursLesson.name === lesson.name)
+                      course.lesson.some(
+                        (coursLesson) =>
+                          coursLesson.name === lessonName && coursLesson.lessonLink === lessonLink
+                      )
                     ) {
-                      return course.name; // Return the course name as the chapter name
+                      return course.name; // Retourne le nom du chapitre
                     }
                   }
-                  return ''; // Default to an empty string if no parent course is found
+                  return ''; // Retourne une chaîne vide si aucun chapitre parent n'est trouvé
                 };
 
-                const chapterName = findParentCourse(); // Get the chapter name dynamically
+
+                const chapterName = findParentCourse(lesson.name, lesson.lessonLink); // Obtenir le nom du chapitre correct
 
                 // Check if the chapter name is different from the previous one
                 const isDifferentChapter = chapterName !== previousChapterName;
