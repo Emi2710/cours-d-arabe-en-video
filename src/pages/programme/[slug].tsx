@@ -1,5 +1,6 @@
 import { GetStaticProps } from 'next';
 import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'; // Import the useRouter hook
 import PortableText from 'react-portable-text';
 import { sanityClient, urlFor } from '../../../client/sanity';
 import Link from 'next/link'
@@ -20,11 +21,8 @@ interface Props {
 
 
 const Page = ({programme}: Props) => {
-
-
-  
-
     
+const router = useRouter(); // Initialize the router
 
   /* LOGIQUE DE PROGRESSION DES LECONS */
 
@@ -40,7 +38,7 @@ const Page = ({programme}: Props) => {
   }, []);
 
   // Mettre à jour la progression de l'utilisateur lorsque la checkbox est cochée ou décochée
-  const handleCheckboxChange = (chapterName: string, lessonName: string, isCompleted: boolean) => {
+  const handleCheckboxChange = (chapterName: string, lessonLink: string, isCompleted: boolean) => {
     // Copier l'état actuel de complétion
     const updatedCompletion = { ...chapterCompletion };
     // Vérifier si le chapitre existe déjà
@@ -49,11 +47,12 @@ const Page = ({programme}: Props) => {
     }
     // Mettre à jour la complétion de la leçon spécifiée
     if (isCompleted) {
-      if (!updatedCompletion[chapterName].includes(lessonName)) {
-        updatedCompletion[chapterName].push(lessonName);
+      
+      if (!updatedCompletion[chapterName].includes(lessonLink)) {
+        updatedCompletion[chapterName].push(lessonLink);
       }
     } else {
-      const index = updatedCompletion[chapterName].indexOf(lessonName);
+      const index = updatedCompletion[chapterName].indexOf(lessonLink);
       if (index !== -1) {
         updatedCompletion[chapterName].splice(index, 1);
       }
@@ -74,7 +73,7 @@ const Page = ({programme}: Props) => {
     if (isCompleted) {
       updatedCompletion[chapterName] = programme.cours
         .find((cours) => cours.name === chapterName)
-        ?.lesson?.map((lesson) => lesson.name) || [];
+        ?.lesson?.map((lesson) => lesson.lessonLink) || [];
     } else {
       updatedCompletion[chapterName] = [];
     }
@@ -168,7 +167,7 @@ const renderDefaultView = () => {
       
 
           {cours.lesson?.map((lesson) => (
-            <div className='flex'>
+            <div className='flex' id={lesson.lessonLink}>
 
               <Lesson
               key={lesson.name}
@@ -181,8 +180,8 @@ const renderDefaultView = () => {
 
               <input
                 type='checkbox'
-                checked={chapterCompletion[cours.name]?.includes(lesson.name) || false}
-                onChange={(e) => handleCheckboxChange(cours.name, lesson.name, e.target.checked)}
+                checked={chapterCompletion[cours.name]?.includes(lesson.lessonLink) || false}
+                onChange={(e) => handleCheckboxChange(cours.name, lesson.lessonLink, e.target.checked)}
               />
 
               
@@ -264,6 +263,29 @@ const findChapterResources = (chapterName: string) => {
   const course = programme.cours.find((cours) => cours.name === chapterName);
   return course?.ressourcesUtiles || null;
 };
+
+
+/* PERMETTRE A L'UTILISATEUR D'ALLER JUSQUA LA DERNIERE LECON COCHEE COMME COMPLETEE */
+
+const scrollToLastCompletedLesson = () => {
+  // Recherchez la dernière leçon complétée
+  let lastCompletedLesson = null;
+  for (const chapterName in chapterCompletion) {
+    const completedLessons = chapterCompletion[chapterName];
+    if (completedLessons.length > 0) {
+      const lastLessonName = completedLessons[completedLessons.length - 1];
+      lastCompletedLesson = document.getElementById(lastLessonName);
+    }
+  }
+
+  // Si une leçon complétée a été trouvée, faites défiler la page jusqu'à elle
+  if (lastCompletedLesson) {
+    lastCompletedLesson.scrollIntoView({ behavior: 'smooth' });
+  }
+};
+
+
+
 
   
   return (
@@ -374,6 +396,9 @@ const findChapterResources = (chapterName: string) => {
               </div>
             </div>
           ) : ''}
+
+          {/* Button to navigate to the last completed chapter */}
+<button onClick={scrollToLastCompletedLesson}>Aller à la dernière leçon complétée</button>
 
 
           <div>
