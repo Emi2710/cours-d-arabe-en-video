@@ -75,7 +75,9 @@ export type RetrouveLesCours = {
 type Cours = {
   _id : string;
   name: string;
-  slug: string;
+  slug: {
+        current: string;
+  };
   ressourcesUtiles?: Ressources[];
   lesson: LessonType[];
   category?: string;

@@ -115,7 +115,7 @@ const renderDefaultView = () => {
 
           <div className='flex'>
             
-            <h3 className="petit-titre mb-3" id={cours.slug}>
+            <h3 className="petit-titre mb-3" id={cours.slug.current}>
               {cours.name}
             </h3>
             <input
@@ -221,15 +221,16 @@ const renderDefaultView = () => {
 const calculateChapterProgress = (chapterName: string) => {
   const completedLessons = chapterCompletion[chapterName] || [];
   const totalLessons = programme.cours
-    .find((cours) => cours.name === chapterName)?.lesson?.length || 0;
-  
-  if (totalLessons === 0) {
+    .find((cours) => cours.name === chapterName)?.lesson?.map((lesson) => lesson.name) || [];
+
+  if (totalLessons.length === 0) {
     return '0';
   }
 
-  const progress = Math.round((completedLessons.length / totalLessons) * 100);
-  return progress.toString(); // Convertit le nombre en chaîne de caractères
+  const progress = Math.round((completedLessons.length / totalLessons.length) * 100);
+  return progress.toString();
 };
+
 
 
 /* AFFICHER LA PROGRESSION GLOBALE */
@@ -258,7 +259,11 @@ const calculateGlobalProgress = () => {
 
 const displayedChapters = new Set();
 
-
+/* FIND CORRECT RESSOURCES UTILES FOR CHAPTER */
+const findChapterResources = (chapterName: string) => {
+  const course = programme.cours.find((cours) => cours.name === chapterName);
+  return course?.ressourcesUtiles || null;
+};
 
   
   return (
@@ -395,17 +400,14 @@ const displayedChapters = new Set();
                       course.lesson.some(
                         (coursLesson) =>
                           coursLesson.name === lessonName && coursLesson.lessonLink === lessonLink
-                      )
-                    ) {
-                      return course.name; // Retourne le nom du chapitre
+                      )                    ) {
+                      return course.name; // Return the course name as the chapter name
                     }
                   }
-                  return ''; // Retourne une chaîne vide si aucun chapitre parent n'est trouvé
+                  return ''; // Default to an empty string if no parent course is found
                 };
 
-
                 const chapterName = findParentCourse(lesson.name, lesson.lessonLink); // Obtenir le nom du chapitre correct
-
                 // Check if the chapter name is different from the previous one
                 const isDifferentChapter = chapterName !== previousChapterName;
 
@@ -434,7 +436,9 @@ const displayedChapters = new Set();
                     displayedChapters.add(chapterName);
 
                     // Affichez ici les ressources utiles pour ce chapitre
-                    const chapterRessources = findParentRessources();
+                    const chapterRessources = findChapterResources(chapterName);
+
+
                     if (chapterRessources) {
                       return (
                         <div key={chapterName}>
@@ -461,9 +465,11 @@ const displayedChapters = new Set();
                             
 
                           </div>
-                          <div className='mb-16 py-7 px-6 bg-gris-clair'>
+                          
+                          {chapterRessources ? (
+                            <div className='mb-16 py-7 px-6 bg-gris-clair'>
                             <h4 className='petit-titre'>📚 Ressources utiles</h4>
-                            {chapterRessources.map((ressource, index) => (
+                            {chapterRessources?.map((ressource, index) => (
                               <div key={index}>
                                 {ressource.type === 'pdf' && (
                                   <Pdf
@@ -481,6 +487,8 @@ const displayedChapters = new Set();
                               </div>
                             ))}
                           </div>
+                          ) : '' }
+                          
 
                           <div className='flex'>
 
