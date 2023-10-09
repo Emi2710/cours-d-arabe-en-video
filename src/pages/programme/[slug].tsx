@@ -256,7 +256,7 @@ const calculateGlobalProgress = () => {
 
 /* CONTROLER L'AFFICHE DES RESSOURCES UTILES DANS LA BOUCLE DES COURS PUBLIES SELON LEUR DATE DE PUBLICATION */
 
-const [displayedChapterRessources, setDisplayedChapterRessources] = useState<string[]>([]);
+const displayedChapters = new Set();
 
 
 
@@ -408,6 +408,8 @@ const [displayedChapterRessources, setDisplayedChapterRessources] = useState<str
                 // Update the previousChapterName with the current chapter name
                 previousChapterName = chapterName;
 
+                
+
                 const findParentRessources = () => {
                   for (const course of programme.cours) {
                     if (
@@ -420,7 +422,86 @@ const [displayedChapterRessources, setDisplayedChapterRessources] = useState<str
                   return ''; // Default to an empty string if no parent course is found
                 };
 
-                const chapterRessource = findParentRessources();
+                // Vérifiez si le nom du chapitre actuel a déjà été affiché
+                const isChapterDisplayed = displayedChapters.has(chapterName);
+                
+                if (!isChapterDisplayed) {
+                    // Marquez le chapitre comme déjà affiché
+                    displayedChapters.add(chapterName);
+
+                    // Affichez ici les ressources utiles pour ce chapitre
+                    const chapterRessources = findParentRessources();
+                    if (chapterRessources) {
+                      return (
+                        <div key={chapterName}>
+                          <div>
+                            <div className='flex items-center'>
+                              <h3 className="petit-titre mb-3">{chapterName}</h3>
+                              <input
+                                type='checkbox'
+                                checked={
+                                  chapterCompletion[chapterName]?.length ===
+                                  programme.cours
+                                    .find((cours) => cours.name === chapterName)
+                                    ?.lesson?.length
+                                }
+                                onChange={(e) => handleChapterCheckboxChange(chapterName, e.target.checked)}
+                              />  
+                            </div>
+
+                            <div className='flex items-center mb-10'>
+                              <progress id='file' max='100' value={calculateChapterProgress(chapterName)} className='progress_bar' />
+                              <p className='pl-2'>{calculateChapterProgress(chapterName)}%</p>
+                            </div>
+
+                            
+
+                          </div>
+                          <div className='mb-16 py-7 px-6 bg-gris-clair'>
+                            <h4 className='petit-titre'>📚 Ressources utiles</h4>
+                            {chapterRessources.map((ressource, index) => (
+                              <div key={index}>
+                                {ressource.type === 'pdf' && (
+                                  <Pdf
+                                    linkTitle={ressource.linkTitle}
+                                    linkUrl={ressource.linkUrl}
+                                    type={ressource.type}
+                                  />
+                                )}
+                                {ressource.type === 'vocab' && (
+                                  <Vocab
+                                    linkTitle={ressource.linkTitle}
+                                    linkUrl={ressource.linkUrl}
+                                  />
+                                )}
+                              </div>
+                            ))}
+                          </div>
+
+                          <div className='flex'>
+
+                              <Lesson
+                                key={lesson.name}
+                                name={lesson.name}
+                                lessonLink={lesson.lessonLink}
+                                pdfLink={lesson.pdfLink}
+                                type={lesson.type}
+                                publishedAt={lesson.publishedAt}
+                              />  
+
+                              <input
+                                type='checkbox'
+                                checked={chapterCompletion[chapterName]?.includes(lesson.name) || false}
+                                onChange={(e) => handleCheckboxChange(chapterName, lesson.name, e.target.checked)}
+                              />
+
+                              
+                          </div>
+                        </div>
+                      );
+                    }
+                  }
+
 
                 return (
                   <div key={lesson.name}>
@@ -444,46 +525,11 @@ const [displayedChapterRessources, setDisplayedChapterRessources] = useState<str
                         <progress id='file' max='100' value={calculateChapterProgress(chapterName)} className='progress_bar' />
                         <p className='pl-2'>{calculateChapterProgress(chapterName)}%</p>
                       </div>
-
-                      {chapterRessource? (
-
-                        <div className='mb-16 py-7 px-6 bg-gris-clair'>
-                          <h4 className='petit-titre'>📚Ressources utiles</h4>
-                          {chapterRessource?.map((ressource) => (
-                            <div>
-                              <Pdf 
-                                  linkTitle={ressource.linkTitle} 
-                                  linkUrl={ressource.linkUrl} 
-                                  type={ressource.type} 
-                                />
-                              
-                              
-                              <div className='flex justify-center items-center'>
-
-                                  {ressource.type == 'vocab' && (
-
-                                  <Vocab 
-                                    linkTitle={ressource.linkTitle} 
-                                    linkUrl={ressource.linkUrl} 
-                                  />
-                                  
-                                  )}
-                                  
-
-                              </div>                        
-                            </div>
-                              
-                          ))}
-
-                        
-                        </div>
-
-                      ) : ''}
                       
-                      </div>}
+                  </div>}
 
                     
-                    <div className='flex'>
+                  <div className='flex'>
 
                       <Lesson
                         key={lesson.name}
@@ -501,7 +547,7 @@ const [displayedChapterRessources, setDisplayedChapterRessources] = useState<str
                       />
 
                       
-                    </div>
+                  </div>
                     
                   </div>
                 );
