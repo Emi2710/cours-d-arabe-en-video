@@ -376,7 +376,7 @@ const scrollToLastCompletedLesson = () => {
                   return (
                   <div className='flex justify-between' key={cours.name}>
                     <div>
-                      <Link href={`#${cours.slug}`} onClick={() => {
+                      <Link href={`#${cours.slug.current}`} onClick={() => {
                         
                         setShowOrderByPublication(false);
                         // Sauvegardez la préférence de l'utilisateur dans localStorage
@@ -515,7 +515,7 @@ const scrollToLastCompletedLesson = () => {
                           ) : '' }
                           
 
-                          <div className='flex'>
+                          <div className='flex' id={lesson.lessonLink}>
 
                               <Lesson
                                 key={lesson.name}
@@ -528,8 +528,8 @@ const scrollToLastCompletedLesson = () => {
 
                               <input
                                 type='checkbox'
-                                checked={chapterCompletion[chapterName]?.includes(lesson.name) || false}
-                                onChange={(e) => handleCheckboxChange(chapterName, lesson.name, e.target.checked)}
+                                checked={chapterCompletion[chapterName]?.includes(lesson.lessonLink) || false}
+                                onChange={(e) => handleCheckboxChange(chapterName, lesson.lessonLink, e.target.checked)}
                               />
 
                               
@@ -566,7 +566,7 @@ const scrollToLastCompletedLesson = () => {
                   </div>}
 
                     
-                  <div className='flex'>
+                  <div className='flex' id={lesson.lessonLink}>
 
                       <Lesson
                         key={lesson.name}
@@ -579,8 +579,8 @@ const scrollToLastCompletedLesson = () => {
 
                       <input
                         type='checkbox'
-                        checked={chapterCompletion[chapterName]?.includes(lesson.name) || false}
-                        onChange={(e) => handleCheckboxChange(chapterName, lesson.name, e.target.checked)}
+                        checked={chapterCompletion[chapterName]?.includes(lesson.lessonLink) || false}
+                        onChange={(e) => handleCheckboxChange(chapterName, lesson.lessonLink, e.target.checked)}
                       />
 
                       
