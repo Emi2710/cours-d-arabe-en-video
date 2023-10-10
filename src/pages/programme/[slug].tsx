@@ -372,10 +372,13 @@ const scrollToLastCompletedLesson = () => {
 
               <div>
                 {programme.cours?.map((cours) => {
+
+                  const chapterName = cours.name;
+                  const progress = calculateChapterProgress(chapterName); // Calculer la progression du chapitre
                   
                   return (
                   <div className='flex justify-between' key={cours.name}>
-                    <div>
+                    <div className='flex'>
                       <Link href={`#${cours.slug.current}`} onClick={() => {
                         
                         setShowOrderByPublication(false);
@@ -387,6 +390,9 @@ const scrollToLastCompletedLesson = () => {
                           {cours.name}
                         </p>  
                       </Link>
+                      <div>
+                        <p>{progress}%</p>
+                      </div>
                       
                     </div>
                   </div>
