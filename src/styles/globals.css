@@ -11,6 +11,10 @@
   --barlow-font-bold: 'Barlow Bold', sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Barlow Medium', sans-serif;
 }
