@@ -10,7 +10,7 @@ export default function Lesson({name, lessonLink, pdfLink, type, publishedAt}: L
 
       {type == 'lesson' &&
       
-        <div className='border-3 border-gris-contour py-6 px-5 mb-6'>
+        <div className='border-3 border-gris-contour py-6 px-5 mb-6 mr-5 lg:px-16'>
             <p>{name}</p>
 
             <hr className="border-2 mx-auto my-3 bg-gris-contour text-gris-contour"/>
@@ -50,8 +50,8 @@ export default function Lesson({name, lessonLink, pdfLink, type, publishedAt}: L
 
       {type == 'exam' &&
       
-        <div className='flex justify-center'>
-          <button className='max-w-3xl mx-auto mt-5 petit-texte-gras bg-bleu-foncé py-3 px-8 text-white rounded-[5px] effet-bleu tracking-wide'>
+        <div className='flex justify-center mt-10'>
+          <button className='max-w-3xl mx-auto  petit-texte-gras bg-bleu-foncé py-3 px-8 text-white rounded-[5px] effet-bleu tracking-wide'>
             <a href={lessonLink} target="_blank" rel="noopener noreferrer">
               {name}
             </a>

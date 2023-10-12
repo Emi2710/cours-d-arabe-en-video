@@ -6,7 +6,7 @@ type Props = {}
 export default function Pdf({linkTitle, linkUrl, type}: Ressources) {
   return (
     <div>
-        {type == 'pdf' && <div className='flex items-center justify-center text-center mt-4 mb-2.5'>
+        {type == 'pdf' && <div className='flex items-center justify-center text-center mt-4 mb-2.5 sm:w-[217px] lg:w-[319px]'>
         
           <a href={linkUrl} target="_blank" rel="noopener noreferrer" className='flex flex-col items-center justify-center text-center'>
             <svg width="60" height="80" viewBox="0 0 60 80" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -62,7 +62,7 @@ export default defineType({
     }),
     defineField({
       name: 'cours',
-      title: 'Cours',
+      title: 'Sommaire',
       type: 'array',
       of: [{type: 'reference', to: {type: 'cours'}}],
     }),

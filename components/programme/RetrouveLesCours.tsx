@@ -6,7 +6,7 @@ type Props = {}
 
 export default function RetrouveLesCours({linkTitle, linkUrl}: RetrouveLesCours) {
   return (
-    <div className='mb-4 border-3 border-gris-contour text-center py-6'>
+    <div className='mb-4 border-3 border-gris-contour text-center py-6 sm:px-5 md:w-3/4 md:mx-2 max-w-[330px]'>
                   <Link href={linkUrl} target="_blank" rel="noopener noreferrer" className='text-gris-foncé bold underline flex items-center justify-center'>
                     
                     {linkTitle} 

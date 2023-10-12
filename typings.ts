@@ -103,7 +103,7 @@ export type Ressources = {
   _id?: string;
   linkTitle?: string;
   linkUrl?: string;
-  type?: 'pdf' | 'vocab' | 'schema';
+  type?: 'pdf' | 'anki' | 'quizlet' | 'schema';
 
 }
 
