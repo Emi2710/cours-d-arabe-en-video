@@ -41,9 +41,9 @@ export default function Navbar({}: Props) {
         <div className={'information-dropdown flex flex-col absolute right-16 bg-white z-30 effet-orange'  +
               (dropDownOpen ? " block" : " hidden")}>
 
-                <Link href="/bien-commencer-son-apprentissage" className='py-3 px-4 border-3 border-gris-contour'>Bien commencer son <br/>apprentissage</Link>
-                <Link href="/qui-suis-je" className='py-3 px-4 border-b-3 border-x-3 border-gris-contour'>Qui suis-je ?</Link>
-                <Link href="/faq" className='py-3 px-4 border-b-3 border-x-3 border-gris-contour'>FAQ</Link>
+                <Link href="/bien-commencer-son-apprentissage" className='py-3 px-4 border-3 border-gris-contour' onClick={() => {setDropDownOpen(false)}}>Bien commencer son <br/>apprentissage</Link>
+                <Link href="/qui-suis-je" className='py-3 px-4 border-b-3 border-x-3 border-gris-contour' onClick={() => {setDropDownOpen(false)}}>Qui suis-je ?</Link>
+                <Link href="/faq" className='py-3 px-4 border-b-3 border-x-3 border-gris-contour' onClick={() => {setDropDownOpen(false)}}>FAQ</Link>
 
         </div>
             

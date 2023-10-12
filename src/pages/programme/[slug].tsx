@@ -179,7 +179,7 @@ const renderDefaultView = () => {
                       {cours.ressourcesUtiles?.map((ressource) => (
                         <div>
                           {ressource.type === 'anki' && (
-                             <a href={ressource.linkUrl} className='flex items-center'>
+                             <a href={ressource.linkUrl} target="_blank" rel="noopener noreferrer" className='flex items-center'>
                                 <p className='bold underline text-gris-foncé mr-1'>{ressource.linkTitle}</p>
                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M1.0625 11.5L0 10.4375L8.9375 1.5H4V0H11.5V7.5H10V2.5625L1.0625 11.5Z" fill="#424242"/>
@@ -193,7 +193,7 @@ const renderDefaultView = () => {
                           )}                  
 
                           {ressource.type === 'quizlet' && (
-                             <a href={ressource.linkUrl} className='flex items-center'>
+                             <a href={ressource.linkUrl} target="_blank" rel="noopener noreferrer" className='flex items-center'>
                                 <p className='bold underline text-gris-foncé mr-1'>{ressource.linkTitle}</p>
                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M1.0625 11.5L0 10.4375L8.9375 1.5H4V0H11.5V7.5H10V2.5625L1.0625 11.5Z" fill="#424242"/>
@@ -944,7 +944,7 @@ const [showSummaryBtn, setShowSummaryBtn] = useState(false);
                                       {chapterRessources?.map((ressource) => (
                                         <div>
                                           {ressource.type === 'anki' && (
-                                            <a href={ressource.linkUrl} className='flex items-center'>
+                                            <a href={ressource.linkUrl} target="_blank" rel="noopener noreferrer" className='flex items-center'>
                                                 <p className='bold underline text-gris-foncé mr-1'>{ressource.linkTitle}</p>
                                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M1.0625 11.5L0 10.4375L8.9375 1.5H4V0H11.5V7.5H10V2.5625L1.0625 11.5Z" fill="#424242"/>
@@ -958,7 +958,7 @@ const [showSummaryBtn, setShowSummaryBtn] = useState(false);
                                           )}                  
 
                                           {ressource.type === 'quizlet' && (
-                                            <a href={ressource.linkUrl} className='flex items-center'>
+                                            <a href={ressource.linkUrl} target="_blank" rel="noopener noreferrer" className='flex items-center'>
                                                 <p className='bold underline text-gris-foncé mr-1'>{ressource.linkTitle}</p>
                                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M1.0625 11.5L0 10.4375L8.9375 1.5H4V0H11.5V7.5H10V2.5625L1.0625 11.5Z" fill="#424242"/>
