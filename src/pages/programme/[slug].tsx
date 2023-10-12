@@ -1,17 +1,16 @@
 import { GetStaticProps } from 'next';
-import React, { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'; // Import the useRouter hook
+import React, { useEffect, useRef, useState } from 'react'
 import PortableText from 'react-portable-text';
 import { sanityClient, urlFor } from '../../../client/sanity';
 import Link from 'next/link'
 
 import Layout from '../../../components/Layout';
-import { CoursDetails, LessonType, Programme } from '../../../typings';
+import { LessonType, Programme } from '../../../typings';
 import Lesson from '../../../components/programme/Lesson';
 import RetrouveLesCours from '../../../components/programme/RetrouveLesCours';
 import Pdf from '../../../components/programme/Pdf';
-import Vocab from '../../../components/programme/Vocab';
 import Schema from '../../../components/programme/Schema';
+import ClickOutsideDetector from '../../../components/ClickOutsideDetector';
 
 
 
@@ -23,8 +22,6 @@ interface Props {
 
 const Page = ({programme}: Props) => {
     
-const router = useRouter(); // Initialize the router
-
   /* LOGIQUE DE PROGRESSION DES LECONS */
 
   // État local pour stocker la progression de chaque chapitre
@@ -362,7 +359,27 @@ const scrollToLastCompletedLesson = () => {
 };
 
 
+/* BOUTON TOGGLE ORGANISER PAR */
 
+const [showCategories, setShowCategories] = useState(false);
+  const categoryMenuRef = useRef<HTMLDivElement | null>(null);
+
+  // Add an event listener to the window to handle clicks
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (categoryMenuRef.current && event.target instanceof Element && !categoryMenuRef.current.contains(event.target)) {
+        // Click occurred outside the category menu
+        setShowCategories(false);
+      }
+    };
+
+    window.addEventListener('click', handleClickOutside);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
 
   
   return (
@@ -406,9 +423,7 @@ const scrollToLastCompletedLesson = () => {
                     ),
                     link: ({href, children}: any) => (
                         <a href={href} className='text-blue-500 hover:underline'>{children}</a>
-                    ),
-                    
-                    
+                    ),                  
 
                 }}
                 />
@@ -455,17 +470,81 @@ const scrollToLastCompletedLesson = () => {
               <div className='flex justify-between lg:justify-normal items-center mb-5 sm:max-w-[1090px] m-auto'>
                 <h3 className='petit-titre lg:mr-10 sm:grand-titre-mobile lg:grand-titre'>Sommaire</h3>
                 <div className=''>
-                  <div className='border-3 border-gris-contour'>
-                    <div className='flex items-center py-2.5 px-3 sm:px-5'>
+                  <div className='border-3 border-gris-contour' ref={categoryMenuRef}>
+                    <div className='flex items-center py-2.5 px-3 sm:px-5 cursor-pointer' onClick={() => setShowCategories(!showCategories)}>
                       <p className='petit-texte pr-1'>Organiser par...</p>
                       <svg width="19" height="11" viewBox="0 0 19 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M9.9549 10.5L0.909668 1.52535L1.94312 0.5L9.9549 8.44927L17.9667 0.5L19.0001 1.52535L9.9549 10.5Z" fill="#1C1B1F"/>
-                      </svg>
-  
+                      </svg>  
                     </div>
                     
                   </div>
                 </div>
+
+                {showCategories && (
+
+
+                <div className='absolute right-0 lg:right-[650px] z-10 sm:mr-5 mt-[300px] w-screen max-w-[330px] bg-white border-gris-contour border-3 mx-auto'>
+
+                      <div onClick={() => {
+                        setShowOrderByPublication(false);
+                        // Sauvegardez la préférence de l'utilisateur dans localStorage
+                        localStorage.setItem('showOrderByPublication', JSON.stringify(false));
+
+                      }}>
+                        <div className='flex items-center'>
+                                      <div className='mx-5'>
+                                        {showOrderByPublication && <svg className='ml-3' width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="5" cy="5" r="5" fill="#C3CFD9"/>
+                                        </svg>
+                                        }
+
+                                        {!showOrderByPublication && <svg width="22" height="15" viewBox="0 0 22 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7.85416 14.8748L0.8125 7.83316L2.30206 6.34357L7.85416 11.8957L19.6771 0.0727234L21.1667 1.56232L7.85416 14.8748Z" fill="#1AAE9F"/>
+                                        </svg>
+                                        }
+
+                                      </div>
+                                      <div className='p-3 cursor-pointer'>
+                                        <p className='bold'>Catégorie</p>
+                                        <p className='text-texte-clair'>Les  leçons sont organisées par thèmes séparés</p>  
+                                      </div>                    
+                          </div>
+                      </div>
+
+                      <div onClick={() => {
+                        setShowOrderByPublication(true);
+                        // Sauvegardez la préférence de l'utilisateur dans localStorage
+                        localStorage.setItem('showOrderByPublication', JSON.stringify(true));
+
+                      }}>
+                          <div className='flex items-center'>
+                            <div className='mx-5'>
+                                        {!showOrderByPublication && <svg className='ml-3' width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="5" cy="5" r="5" fill="#C3CFD9"/>
+                                        </svg>
+                                        }
+
+                                        {showOrderByPublication && <svg width="22" height="15" viewBox="0 0 22 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7.85416 14.8748L0.8125 7.83316L2.30206 6.34357L7.85416 11.8957L19.6771 0.0727234L21.1667 1.56232L7.85416 14.8748Z" fill="#1AAE9F"/>
+                                        </svg>
+                                        }
+                            </div>
+                            <div className='p-3 cursor-pointer'>
+                              <p className='bold'>Ordre de publication</p>
+                              <p className='text-texte-clair'>Les  thèmes sont mélangés selon un ordre logique pour combiner leur bénéfices</p>  
+                            </div>                    
+                        </div>
+                                                
+                      </div>
+
+                      
+
+                </div>
+                
+
+                )}
+                
               </div>
 
               <div className='relative'>
@@ -539,16 +618,6 @@ const scrollToLastCompletedLesson = () => {
 
 
           <div>
-        {/* Button to toggle between default and publication order */}
-          <button onClick={() => {
-            const newValue = !showOrderByPublication;
-            // Mettez à jour l'état local
-            setShowOrderByPublication(newValue);
-            // Sauvegardez la préférence de l'utilisateur dans localStorage
-            localStorage.setItem('showOrderByPublication', JSON.stringify(newValue));
-          }}>
-            {showOrderByPublication ? 'Afficher par défaut' : 'Afficher par ordre de publication'}
-          </button>
 
 
         {/* Render lessons based on the selected view */}
