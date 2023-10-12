@@ -10,7 +10,6 @@ import Lesson from '../../../components/programme/Lesson';
 import RetrouveLesCours from '../../../components/programme/RetrouveLesCours';
 import Pdf from '../../../components/programme/Pdf';
 import Schema from '../../../components/programme/Schema';
-import ClickOutsideDetector from '../../../components/ClickOutsideDetector';
 
 
 
@@ -381,6 +380,35 @@ const [showCategories, setShowCategories] = useState(false);
     };
   }, []);
 
+
+  /*SUMMARY BUTTON*/
+
+  //Show summary button down to a certain point only
+  const [showButton, setShowButton] = useState(false);
+
+  // Add an event listener to track the scroll position
+  useEffect(() => {
+  const handleScroll = () => {
+    const buttonThreshold = document.querySelector('.content')?.getBoundingClientRect().bottom || 0;
+    
+    if (window.scrollY > buttonThreshold) {
+      setShowButton(true);
+    } else {
+      setShowButton(false);
+    }
+  };
+
+  window.addEventListener('scroll', handleScroll);
+
+  return () => {
+    window.removeEventListener('scroll', handleScroll);
+  };
+}, []);
+
+//Toggle summary 
+const [showSummaryBtn, setShowSummaryBtn] = useState(false);
+
+
   
   return (
     <Layout>
@@ -618,6 +646,187 @@ const [showCategories, setShowCategories] = useState(false);
 
 
           <div>
+
+          <div className='content'>
+            {showButton && (
+
+              <div className='fixed-button z-10'
+              
+              onClick={() => {
+                        setShowSummaryBtn(!showSummaryBtn);
+                        console.log("ça marche 2")
+
+              }} 
+              
+              >
+
+                <svg width="23" height="11" viewBox="0 0 23 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.891013 11C0.642185 11 0.431476 10.9265 0.258886 10.7794C0.0862953 10.6324 0 10.4502 0 10.2329C0 10.0155 0.0841641 9.83144 0.252493 9.68068C0.420821 9.52992 0.629399 9.45454 0.878228 9.45454C1.12706 9.45454 1.33777 9.52806 1.51036 9.67509C1.68295 9.82213 1.76924 10.0043 1.76924 10.2217C1.76924 10.439 1.68508 10.6231 1.51675 10.7739C1.34842 10.9246 1.13984 11 0.891013 11ZM0.891013 6.27273C0.642185 6.27273 0.431476 6.19921 0.258886 6.05218C0.0862953 5.90514 0 5.72294 0 5.50559C0 5.28823 0.0841641 5.10417 0.252493 4.95341C0.420821 4.80265 0.629399 4.72727 0.878228 4.72727C1.12706 4.72727 1.33777 4.80079 1.51036 4.94782C1.68295 5.09486 1.76924 5.27706 1.76924 5.49442C1.76924 5.71177 1.68508 5.89583 1.51675 6.04659C1.34842 6.19735 1.13984 6.27273 0.891013 6.27273ZM0.891013 1.54546C0.642185 1.54546 0.431476 1.47194 0.258886 1.32491C0.0862953 1.17787 0 0.995671 0 0.778315C0 0.560959 0.0841641 0.376901 0.252493 0.22614C0.420821 0.07538 0.629399 0 0.878228 0C1.12706 0 1.33777 0.0735188 1.51036 0.220557C1.68295 0.367594 1.76924 0.549791 1.76924 0.767147C1.76924 0.984503 1.68508 1.16856 1.51675 1.31932C1.34842 1.47008 1.13984 1.54546 0.891013 1.54546ZM5.04752 10.8182V9.63636H23V10.8182H5.04752ZM5.04752 6.09091V4.90909H23V6.09091H5.04752ZM5.04752 1.36364V0.181822H23V1.36364H5.04752Z" fill="#424242"/>
+                </svg>
+
+              </div>  
+            )}
+            
+          </div>
+
+         
+          {showSummaryBtn && (
+
+            <div className='bg-white h-screen z-50 w-screen fixed top-0 right-0 sm:max-w-[430px] sm:h-[730px] effet-gris rounded-3xl'>
+            
+            <svg 
+              onClick={() => {setShowSummaryBtn(false)}} 
+              className='absolute top-10 right-10 cursor-pointer' width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2.26634 18.5417L0.458008 16.7334L7.69134 9.50004L0.458008 2.26671L2.26634 0.458374L9.49967 7.69171L16.733 0.458374L18.5413 2.26671L11.308 9.50004L18.5413 16.7334L16.733 18.5417L9.49967 11.3084L2.26634 18.5417Z" fill="#424242"/>
+            </svg>
+
+
+
+            {programme.cours ? (
+            <div className='p-10 mt-16 sm:mt-0'>
+              <div className='flex sm:flex-col sm:items-start justify-between lg:justify-normal items-center mb-5 sm:max-w-[1090px] m-auto'>
+                <h3 className='petit-titre sm:mb-3 lg:mr-10 sm:grand-titre-mobile lg:grand-titre'>Sommaire</h3>
+                <div className=''>
+                  <div className='border-3 border-gris-contour' ref={categoryMenuRef}>
+                    <div className='flex items-center py-2.5 px-3 sm:px-5 cursor-pointer' onClick={() => setShowCategories(!showCategories)}>
+                      <p className='petit-texte pr-1'>Organiser par...</p>
+                      <svg width="19" height="11" viewBox="0 0 19 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M9.9549 10.5L0.909668 1.52535L1.94312 0.5L9.9549 8.44927L17.9667 0.5L19.0001 1.52535L9.9549 10.5Z" fill="#1C1B1F"/>
+                      </svg>  
+                    </div>
+                    
+                  </div>
+                </div>
+
+                {showCategories && (
+
+
+                <div className='absolute right-0 z-10 mt-[300px] sm:mt-[125px] w-screen max-w-[330px] bg-white border-gris-contour border-3 mx-auto sm:mr-[60px]'>
+
+                      <div onClick={() => {
+                        setShowOrderByPublication(false);
+                        setShowSummaryBtn(false);
+                        setShowCategories(false);
+                        // Sauvegardez la préférence de l'utilisateur dans localStorage
+                        localStorage.setItem('showOrderByPublication', JSON.stringify(false));
+
+                      }}>
+                        <div className='flex items-center'>
+                                      <div className='mx-5'>
+                                        {showOrderByPublication && <svg className='ml-3' width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="5" cy="5" r="5" fill="#C3CFD9"/>
+                                        </svg>
+                                        }
+
+                                        {!showOrderByPublication && <svg width="22" height="15" viewBox="0 0 22 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7.85416 14.8748L0.8125 7.83316L2.30206 6.34357L7.85416 11.8957L19.6771 0.0727234L21.1667 1.56232L7.85416 14.8748Z" fill="#1AAE9F"/>
+                                        </svg>
+                                        }
+
+                                      </div>
+                                      <div className='p-3 cursor-pointer'>
+                                        <p className='bold'>Catégorie</p>
+                                        <p className='text-texte-clair'>Les  leçons sont organisées par thèmes séparés</p>  
+                                      </div>                    
+                          </div>
+                      </div>
+
+                      <div onClick={() => {
+                        setShowOrderByPublication(true);
+                        setShowSummaryBtn(false);
+                        setShowCategories(false);
+                        // Sauvegardez la préférence de l'utilisateur dans localStorage
+                        localStorage.setItem('showOrderByPublication', JSON.stringify(true));
+
+                      }}>
+                          <div className='flex items-center'>
+                            <div className='mx-5'>
+                                        {!showOrderByPublication && <svg className='ml-3' width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="5" cy="5" r="5" fill="#C3CFD9"/>
+                                        </svg>
+                                        }
+
+                                        {showOrderByPublication && <svg width="22" height="15" viewBox="0 0 22 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7.85416 14.8748L0.8125 7.83316L2.30206 6.34357L7.85416 11.8957L19.6771 0.0727234L21.1667 1.56232L7.85416 14.8748Z" fill="#1AAE9F"/>
+                                        </svg>
+                                        }
+                            </div>
+                            <div className='p-3 cursor-pointer'>
+                              <p className='bold'>Ordre de publication</p>
+                              <p className='text-texte-clair'>Les  thèmes sont mélangés selon un ordre logique pour combiner leur bénéfices</p>  
+                            </div>                    
+                        </div>
+                                                
+                      </div>
+
+                      
+
+                </div>
+                
+
+                )}
+                
+              </div>
+
+              <div className='relative'>
+                {programme.cours?.map((cours) => {
+
+                  const chapterName = cours.name;
+                  const progress = calculateChapterProgress(chapterName); // Calculer la progression du chapitre
+                  
+                  return (
+                  <div key={cours.name} className='sm:max-w-[1090px] m-auto'>
+                    <div className='flex justify-between sm:justify-normal'>
+                      <Link href={`#${cours.slug.current}`} onClick={() => {
+                        
+                        setShowOrderByPublication(false);
+                        setShowSummaryBtn(false);
+                        // Sauvegardez la préférence de l'utilisateur dans localStorage
+                        localStorage.setItem('showOrderByPublication', JSON.stringify(false));
+                      }}>
+
+                        <p className='cursor-pointer mb-3.5 text-gris-foncé underline bold'>
+                          {cours.name}
+                        </p>  
+                      </Link>
+                      <div>
+                        <p className='text-vert opacity-50 mt-0.5 sm:ml-3'>{progress}%</p>
+                      </div>
+                      
+                    </div>
+                  </div>
+                )
+                
+                })}
+                
+              </div>
+
+              {/* Button to navigate to the last completed chapter */}
+              <div className='flex items-center mt-6 max-w-[1090px] m-auto'>
+                
+                <button onClick={() => {
+                        
+                        scrollToLastCompletedLesson();
+                        setShowSummaryBtn(false);
+                      }} 
+                      
+                      className='underline bold text-vert opacity-70 pr-1'>Aller au dernier cours vu</button>
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.0625 11.5L0 10.4375L8.9375 1.5H4V0H11.5V7.5H10V2.5625L1.0625 11.5Z" fill="#1AAE9F" fill-opacity="0.5"/>
+                </svg>
+
+              </div>
+
+            </div>
+          ) : ''}
+              
+            </div>
+
+          )}
+            
+          
+
+
 
 
         {/* Render lessons based on the selected view */}

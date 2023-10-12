@@ -106,6 +106,10 @@ body {
   filter: drop-shadow(0px 4px 20px rgba(244, 117, 89, 0.4));
 }
 
+.effet-gris {
+  filter: drop-shadow(0px 4px 20px #F2F5F7);
+}
+
 .effet-marron {
   filter: drop-shadow(0px 4px 20px rgba(183, 87, 67, 0.4));
 }
@@ -208,6 +212,28 @@ progress[value]::-webkit-progress-value {
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+
+/*SUMMARY BUTTON*/
+/* Add this CSS to your component's stylesheet or a global stylesheet */
+
+.fixed-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width:50px;
+  height:50px;
+  background-color: #fff;
+  backdrop-filter: blur(5px);
+  border-radius: 50%;
+  cursor: pointer;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle, #fff 10%, transparent 95%);
+
+}
+
+
 
 
 @media (min-width: 640px) and (max-height: 808px) {
