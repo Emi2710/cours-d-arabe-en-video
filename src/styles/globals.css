@@ -18,6 +18,10 @@
           font-size: 24px;
           font-family: var(--barlow-font-bold);
         }
+    .titan-titre {
+      font-size: 64px;
+      font-family: var(--barlow-font-bold);
+    }
 }
 
 
@@ -133,6 +137,14 @@ body {
   background-size: cover;
 }
 
+.contact_hero--header {
+  background-image: url('../../assets/contact-bg-mobile.svg');
+  
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 /* PROGRESS BAR */
 
 progress[value] {
@@ -245,6 +257,7 @@ progress[value]::-webkit-progress-value {
       background-repeat: no-repeat;
       background-size: cover;
     }
+
 }
 
 @media (min-width: 640px) and (min-height: 809px) {
@@ -256,6 +269,14 @@ progress[value]::-webkit-progress-value {
     background-repeat: no-repeat;
     background-size: cover;
   }
+
+    .contact_hero--header {
+      background-image: url('../../assets/contact-bg-tablet.svg');
+  
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
 }
 
 @media (min-width: 1280px) {
@@ -271,6 +292,14 @@ progress[value]::-webkit-progress-value {
     .accueil_info {
       background-image: url('../../assets/accueil-info-desktop.svg');
   
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .contact_hero--header {
+      background-image: url('../../assets/contact-bg-desktop.svg');
+    
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
