@@ -13,7 +13,7 @@ export default function Schema({linkTitle, linkUrl, type}: Ressources) {
         </div>
 
         <div className='flex items-center mt-3'>
-            <a href={linkUrl} className='bold underline text-gris-foncé mr-1'>{linkTitle}</a>
+            <a href={linkUrl} target="_blank" rel="noopener noreferrer" className='bold underline text-gris-foncé mr-1'>{linkTitle}</a>
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M1.3125 12L0.25 10.9375L9.1875 2H4.25V0.5H11.75V8H10.25V3.0625L1.3125 12Z" fill="#424242"/>
             </svg>

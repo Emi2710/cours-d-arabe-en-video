@@ -177,6 +177,7 @@ const renderDefaultView = () => {
                       
                   ))}
 
+
                   <div className='flex flex-col items-center justify-center'>
                     <div className='flex items-center justify-center mt-4 bg-white border-gris-contour border-3 w-[225px] mx-auto py-3'>
                       {cours.ressourcesUtiles?.map((ressource) => (
