@@ -42,7 +42,7 @@ function programmes({programmes}: Props) {
           return <div key={programme._id}>
               <div className='flex flex-col justify-center items-center bg-gris-clair px-6 py-12 m-5 md:m-8 lg:flex-row lg:px-12 lg:max-w-6xl lg:mx-auto'>
                 
-                <Image
+                <img
                   src={urlFor(programme.mainImage).url()}
                   alt={programme.title}
                   className="lg:w-96 lg:mr-12 w-1/2"
