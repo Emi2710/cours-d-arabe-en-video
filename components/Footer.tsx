@@ -21,9 +21,9 @@ export default function Footer({}: Props) {
 
                   <div className='flex flex-col lg:pr-28'>
                     <Link href="/programmes" className='pb-4'>Programmes</Link>
-                    <Link href="/" className='pb-4'>Langue arabe</Link>
-                    <Link href="/" className='pb-4'>Principe des sciences légiférées</Link>
-                    <Link href="/" className='pb-4'>Cours religieux en français</Link>
+                    <Link href="/programme/cours-d-arabe-en-video" className='pb-4'>Langue arabe</Link>
+                    <Link href="/programme/principes-des-sciences-legiferees" className='pb-4'>Principe des sciences légiférées</Link>
+                    <Link href="/programme/cours-religieux-en-francais" className='pb-4'>Cours religieux en français</Link>
                   </div>
 
                   <div className='flex flex-col lg:pr-28'>
@@ -45,13 +45,13 @@ export default function Footer({}: Props) {
                 </div>
 
                 <div className='socials flex justify-center items-center mt-10'>
-                    <Link href="/telegram" className='pr-5'>
+                    <Link href="https://t.me/livresdemedine" target="_blank" rel="noopener noreferrer" className='pr-5'>
                         <svg width="36" height="35" viewBox="0 0 36 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M18.1875 0C8.52016 0 0.6875 7.83266 0.6875 17.5C0.6875 27.1673 8.52016 35 18.1875 35C27.8548 35 35.6875 27.1673 35.6875 17.5C35.6875 7.83266 27.8548 0 18.1875 0ZM26.7823 11.9889L23.9103 25.5232C23.6986 26.4829 23.127 26.7157 22.3296 26.2641L17.9546 23.0393L15.8448 25.0716C15.6119 25.3044 15.4143 25.502 14.9627 25.502L15.2732 21.0494L23.381 13.7248C23.7339 13.4143 23.3034 13.2379 22.8377 13.5484L12.8175 19.8569L8.49899 18.5091C7.56048 18.2127 7.53931 17.5706 8.69657 17.119L25.5685 10.6129C26.3518 10.3306 27.0363 10.8034 26.7823 11.9889Z" fill="white"/>
                         </svg>
                     </Link>
 
-                    <Link href="/youtube" className='pr-5'>
+                    <Link href="https://www.youtube.com/@coursarabeenvideo/featured" target="_blank" rel="noopener noreferrer" className='pr-5'>
                         <svg width="36" height="35" viewBox="0 0 36 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clipPath="url(#clip0_469_1558)">
                         <path d="M34.9235 9.07599C34.7222 8.33366 34.3301 7.65693 33.7862 7.11306C33.2423 6.56919 32.5656 6.1771 31.8233 5.97575C29.1053 5.23364 18.1656 5.23364 18.1656 5.23364C18.1656 5.23364 7.22539 5.25552 4.50688 5.99763C3.76454 6.19897 3.08782 6.59106 2.54395 7.13494C2.00008 7.67881 1.60799 8.35553 1.40664 9.09786C0.6875 11.8164 0.6875 17.5 0.6875 17.5C0.6875 17.5 0.6875 23.1837 1.42906 25.9241C1.63041 26.6664 2.0225 27.3432 2.56637 27.887C3.11024 28.4309 3.78697 28.823 4.5293 29.0243C7.24727 29.7665 18.1875 29.7665 18.1875 29.7665C18.1875 29.7665 29.1277 29.7665 31.8463 29.0249C32.5886 28.8235 33.2653 28.4315 33.8092 27.8876C34.353 27.3437 34.7451 26.667 34.9465 25.9247C35.6875 23.2061 35.6875 17.5 35.6875 17.5C35.6875 17.5 35.6656 11.8164 34.9235 9.07599Z" fill="white"/>
