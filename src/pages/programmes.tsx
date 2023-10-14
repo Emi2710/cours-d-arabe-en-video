@@ -15,7 +15,7 @@ function programmes({programmes}: Props) {
   return (
     <Layout>
       <Head>
-          <title>Programmes de cours d'arabe, principe des sciences légiférées, cours religieux...</title>
+          <title>Programmes de cours d&apos;arabe, principe des sciences légiférées, cours religieux...</title>
       </Head>
       <div className='mb-32'>
         <div className='md:flex justify-around items-center'>
@@ -42,9 +42,9 @@ function programmes({programmes}: Props) {
           return <div key={programme._id}>
               <div className='flex flex-col justify-center items-center bg-gris-clair px-6 py-12 m-5 md:m-8 lg:flex-row lg:px-12 lg:max-w-6xl lg:mx-auto'>
                 
-                <img
+                <Image
                   src={urlFor(programme.mainImage).url()}
-                  alt=''
+                  alt={programme.title}
                   className="lg:w-96 lg:mr-12 w-1/2"
                 />
                 <div className='flex flex-col justify-center items-center lg:items-start lg:justify-start'>

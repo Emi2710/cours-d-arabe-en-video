@@ -20,7 +20,7 @@ const Page = ({page}: Props) => {
   return (
     <div>
       <Head>
-          <title>Cours d'arabe en vidéo gratuit - {page.title}</title>
+          <title>Cours d&apos;arabe en vidéo gratuit - {page.title}</title>
       </Head>
       <div>
       <Layout>
@@ -65,7 +65,7 @@ const Page = ({page}: Props) => {
             {page.faq?(
                 <div>
                     {page.faq.map((faq) => (
-                        <div>
+                        <div key={faq._id}>
                             <h3 className='petit-titre my-5'>📌{faq.question}</h3>
                             <div className='bg-gris-clair mb-16'>
                                 

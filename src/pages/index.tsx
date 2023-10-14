@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <Layout>
       <Head>
-          <title>Cours d'arabe en vidéo gratuit - jusqu'à devenir arabophone</title>
+          <title>Cours d&apos;arabe en vidéo gratuit - jusqu&apos;à devenir arabophone</title>
       </Head>
 
       <div className="accueil_hero--header w-screen h-screen text-center flex flex-col justify-center items-center sm:relative top-7 lg:top-0 z-10">
