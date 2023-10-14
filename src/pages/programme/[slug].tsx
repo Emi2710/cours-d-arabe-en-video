@@ -11,6 +11,9 @@ import RetrouveLesCours from '../../../components/programme/RetrouveLesCours';
 import Pdf from '../../../components/programme/Pdf';
 import Schema from '../../../components/programme/Schema';
 
+import Head from 'next/head'
+import Image from 'next/image';
+
 
 
 
@@ -151,7 +154,7 @@ const renderDefaultView = () => {
                   <div className='sm:flex justify-around items-center'>
 
                     {cours.ressourcesUtiles?.map((ressource) => (
-                    <div>
+                    <div key={ressource._id}>
 
 
                       {ressource.type === 'pdf' && (
@@ -177,7 +180,7 @@ const renderDefaultView = () => {
                   <div className='flex flex-col items-center justify-center'>
                     <div className='flex items-center justify-center mt-4 bg-white border-gris-contour border-3 w-[225px] mx-auto py-3'>
                       {cours.ressourcesUtiles?.map((ressource) => (
-                        <div>
+                        <div key={ressource._id}>
                           {ressource.type === 'anki' && (
                              <a href={ressource.linkUrl} target="_blank" rel="noopener noreferrer" className='flex items-center'>
                                 <p className='bold underline text-gris-foncé mr-1'>{ressource.linkTitle}</p>
@@ -221,12 +224,12 @@ const renderDefaultView = () => {
       
 
           {cours.lesson?.map((lesson) => (
-            <div className='flex items-center justify-center' id={lesson.lessonLink}>
+            <div className='flex items-center justify-center' id={lesson.lessonLink} key={lesson.lessonLink}>
 
               <div className='w-screen max-w-[920px]'>
                 
                 <Lesson
-                  key={lesson.name}
+                  key={lesson.lessonLink}
                   name={lesson.name}
                   lessonLink={lesson.lessonLink}
                   pdfLink={lesson.pdfLink}
@@ -412,6 +415,9 @@ const [showSummaryBtn, setShowSummaryBtn] = useState(false);
   
   return (
     <Layout>
+      <Head>
+          <title>{programme.title}</title>
+      </Head>
       <div className='mx-5'>
       <div>
 
@@ -419,10 +425,9 @@ const [showSummaryBtn, setShowSummaryBtn] = useState(false);
 
               <div className='flex flex-col justify-center items-center mt-7 mb-16'>
 
-                <img
+                <Image
                   src={urlFor(programme.mainImage).url()}
-                  alt=''
-                  className=""
+                  alt={programme.title}
                 />
                   
                 <h1 className='petit-titre sm:grand-titre-mobile lg:grand-titre'>{programme.title}</h1>
@@ -465,7 +470,7 @@ const [showSummaryBtn, setShowSummaryBtn] = useState(false);
               <div className='sm:flex justify-around'>
 
                 {programme.retrouveLesCours?.map((ressource) => (
-                  <RetrouveLesCours linkTitle={ressource.linkTitle} linkUrl={ressource.linkUrl} />
+                  <RetrouveLesCours linkTitle={ressource.linkTitle} linkUrl={ressource.linkUrl} key={ressource._id} />
                 ))} 
 
               </div>
@@ -582,7 +587,7 @@ const [showSummaryBtn, setShowSummaryBtn] = useState(false);
                   const progress = calculateChapterProgress(chapterName); // Calculer la progression du chapitre
                   
                   return (
-                  <div key={cours.name} className='sm:max-w-[1090px] m-auto'>
+                  <div key={cours._id} className='sm:max-w-[1090px] m-auto'>
                     <div className='flex justify-between sm:justify-normal'>
                       <Link href={`#${cours.slug.current}`} onClick={() => {
                         
@@ -635,7 +640,7 @@ const [showSummaryBtn, setShowSummaryBtn] = useState(false);
                 
                 <button onClick={scrollToLastCompletedLesson} className='underline bold text-vert opacity-70 pr-1'>Aller au dernier cours vu</button>
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1.0625 11.5L0 10.4375L8.9375 1.5H4V0H11.5V7.5H10V2.5625L1.0625 11.5Z" fill="#1AAE9F" fill-opacity="0.5"/>
+                <path d="M1.0625 11.5L0 10.4375L8.9375 1.5H4V0H11.5V7.5H10V2.5625L1.0625 11.5Z" fill="#1AAE9F" fillOpacity="0.5"/>
                 </svg>
 
               </div>
@@ -775,7 +780,7 @@ const [showSummaryBtn, setShowSummaryBtn] = useState(false);
                   const progress = calculateChapterProgress(chapterName); // Calculer la progression du chapitre
                   
                   return (
-                  <div key={cours.name} className='sm:max-w-[1090px] m-auto'>
+                  <div key={cours._id} className='sm:max-w-[1090px] m-auto'>
                     <div className='flex justify-between sm:justify-normal'>
                       <Link href={`#${cours.slug.current}`} onClick={() => {
                         
@@ -812,7 +817,7 @@ const [showSummaryBtn, setShowSummaryBtn] = useState(false);
                       
                       className='underline bold text-vert opacity-70 pr-1'>Aller au dernier cours vu</button>
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1.0625 11.5L0 10.4375L8.9375 1.5H4V0H11.5V7.5H10V2.5625L1.0625 11.5Z" fill="#1AAE9F" fill-opacity="0.5"/>
+                <path d="M1.0625 11.5L0 10.4375L8.9375 1.5H4V0H11.5V7.5H10V2.5625L1.0625 11.5Z" fill="#1AAE9F" fillOpacity="0.5"/>
                 </svg>
 
               </div>
@@ -916,7 +921,7 @@ const [showSummaryBtn, setShowSummaryBtn] = useState(false);
                                   <div className='sm:flex justify-around items-center'>
 
                                     {chapterRessources?.map((ressource) => (
-                                    <div>
+                                    <div key={ressource._id}>
 
 
                                       {ressource.type === 'pdf' && (
@@ -942,7 +947,7 @@ const [showSummaryBtn, setShowSummaryBtn] = useState(false);
                                   <div className='flex flex-col items-center justify-center'>
                                     <div className='flex items-center justify-center mt-4 bg-white border-gris-contour border-3 w-[225px] mx-auto py-3'>
                                       {chapterRessources?.map((ressource) => (
-                                        <div>
+                                        <div key={ressource._id}>
                                           {ressource.type === 'anki' && (
                                             <a href={ressource.linkUrl} target="_blank" rel="noopener noreferrer" className='flex items-center'>
                                                 <p className='bold underline text-gris-foncé mr-1'>{ressource.linkTitle}</p>
@@ -987,7 +992,7 @@ const [showSummaryBtn, setShowSummaryBtn] = useState(false);
                               <div className='w-screen max-w-[920px]' id={lesson.lessonLink}>
                                 
                                 <Lesson
-                                  key={lesson.name}
+                                  key={lesson.lessonLink}
                                   name={lesson.name}
                                   lessonLink={lesson.lessonLink}
                                   pdfLink={lesson.pdfLink}
@@ -1021,7 +1026,7 @@ const [showSummaryBtn, setShowSummaryBtn] = useState(false);
 
 
                 return (
-                  <div key={lesson.name}>
+                  <div key={lesson.lessonLink}>
                       
                     {/* Afficher le nom du chapitre uniquement s'il est différent du précédent */}
                     {isDifferentChapter && 
@@ -1068,7 +1073,7 @@ const [showSummaryBtn, setShowSummaryBtn] = useState(false);
                     <div className='w-screen max-w-[920px]'>
                       
                       <Lesson
-                        key={lesson.name}
+                        key={lesson.lessonLink}
                         name={lesson.name}
                         lessonLink={lesson.lessonLink}
                         pdfLink={lesson.pdfLink}

@@ -32,7 +32,7 @@ const handler = async (req, res) => {
       await transporter.sendMail({
         ...mailOptions,
         ...generateEmailContent(data),
-        subject: data.subject,
+        subject: 'Nouveau message sur le site',
       });
 
       return res.status(200).json({ success: true });

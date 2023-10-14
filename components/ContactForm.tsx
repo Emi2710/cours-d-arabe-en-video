@@ -139,7 +139,7 @@ export default function ContactForm() {
       </FormControl>
 
       <Button
-        className='w-[190px] mt-16 mx-auto text-lg bold bg-bleu-foncé py-2 text-white rounded-[5px] effet-bleu tracking-wide'
+        className='hover-animation w-[190px] mt-16 mx-auto text-lg bold bg-bleu-foncé py-2 text-white rounded-[5px] effet-bleu tracking-wide'
         isLoading={isLoading}
         disabled={
            !values.email || !values.message

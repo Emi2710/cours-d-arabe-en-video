@@ -53,7 +53,7 @@ export default function Navbar({}: Props) {
 
             <div>
                 <div className='flex flex-col justify-center items-center liens text-center px-4'>
-                    <Link href="/" className='pb-4'>Page d'accueil</Link>
+                    <Link href="/" className='pb-4'>Page d&apos;accueil</Link>
                     <Link href="/mentions-legales" className='pb-4'>Mentions légales</Link>
                     <Link href="/programmes" className='pb-4'>Programmes</Link>
                     <Link href="/" className='pb-4'>Langue arabe</Link>

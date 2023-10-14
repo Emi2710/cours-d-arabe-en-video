@@ -4,6 +4,7 @@ import { ProgrammeIntro } from '../../typings'
 import { sanityClient, urlFor } from '../../client/sanity';
 import Link from "next/link"
 import Image from "next/image"
+import Head from "next/head"
 
 
 interface Props {
@@ -13,6 +14,9 @@ interface Props {
 function programmes({programmes}: Props) {
   return (
     <Layout>
+      <Head>
+          <title>Programmes de cours d'arabe, principe des sciences légiférées, cours religieux...</title>
+      </Head>
       <div className='mb-32'>
         <div className='md:flex justify-around items-center'>
 
@@ -46,7 +50,7 @@ function programmes({programmes}: Props) {
                 <div className='flex flex-col justify-center items-center lg:items-start lg:justify-start'>
                   <h3 className='petit-titre py-4 text-center lg:text-left'>{programme.title}</h3> 
                   <p className='text-gris-foncé text-center lg:text-left'>{programme.introShort}</p>
-                  <Link href={`/programme/${programme.slug.current}`}><button className='max-w-3xl mx-auto mt-5 bold bg-bleu-foncé py-3 px-8 text-white rounded-[5px] effet-bleu tracking-wide'>Commencer</button></Link>  
+                  <Link href={`/programme/${programme.slug.current}`}><button className='hover-animation max-w-3xl mx-auto mt-5 bold bg-bleu-foncé py-3 px-8 text-white rounded-[5px] effet-bleu tracking-wide'>Commencer</button></Link>  
                 </div>
                 
               </div>

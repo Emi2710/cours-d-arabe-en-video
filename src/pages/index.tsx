@@ -2,12 +2,17 @@ import Link from "next/link"
 import Layout from "../../components/Layout"
 import DecouvreProgramme from "../../components/accueil/DecouvreProgramme"
 import Informations from "../../components/accueil/Informations"
+import Head from "next/head"
 
 
 
 export default function Home() {
   return (
     <Layout>
+      <Head>
+          <title>Cours d'arabe en vidéo gratuit - jusqu'à devenir arabophone</title>
+      </Head>
+
       <div className="accueil_hero--header w-screen h-screen text-center flex flex-col justify-center items-center sm:relative top-7 lg:top-0 z-10">
 
       <svg className="p-2 mb-3 title-mobile md:hidden" width="306" height="122" viewBox="0 0 306 122" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -61,7 +66,7 @@ export default function Home() {
         
 
         <Link href="/programmes">
-          <button className="text-xl button text-black bg-white rounded-md px-8 py-3 my-10 effet-blanc">Je me lance  🚀</button>  
+          <button className="text-xl button text-black bg-white rounded-md px-8 py-3 my-10 effet-blanc hover-animation">Je me lance  🚀</button>  
         </Link>
 
 

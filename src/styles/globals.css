@@ -145,6 +145,14 @@ body {
     background-size: cover;
 }
 
+.bg-deco {
+  background-image: url('../../assets/bg-deco-mobile.svg');
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 /* PROGRESS BAR */
 
 progress[value] {
@@ -245,6 +253,15 @@ progress[value]::-webkit-progress-value {
 
 }
 
+/*ANIMATION HOVER DES BOUTONS */
+.hover-animation {
+  transition: transform 0.2s;
+}
+
+.hover-animation:hover {
+  transform: scale(1.1);
+}
+
 
 
 
@@ -277,6 +294,14 @@ progress[value]::-webkit-progress-value {
       background-repeat: no-repeat;
       background-size: cover;
     }
+
+        .bg-deco {
+          background-image: url('../../assets/bg-deco-tablet.svg');
+    
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+        }
 }
 
 @media (min-width: 1280px) {
@@ -304,5 +329,13 @@ progress[value]::-webkit-progress-value {
       background-repeat: no-repeat;
       background-size: cover;
     }
+
+        .bg-deco {
+          background-image: url('../../assets/bg-deco-tablet.svg');
+    
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+        }
 }
 

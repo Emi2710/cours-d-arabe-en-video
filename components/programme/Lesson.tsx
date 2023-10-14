@@ -50,8 +50,8 @@ export default function Lesson({name, lessonLink, pdfLink, type, publishedAt}: L
 
       {type == 'exam' &&
       
-        <div className='flex justify-center mt-10'>
-          <button className='max-w-3xl mx-auto  petit-texte-gras bg-bleu-foncé py-3 px-8 text-white rounded-[5px] effet-bleu tracking-wide'>
+        <div className='flex justify-center my-10'>
+          <button className='hover-animation max-w-3xl mx-auto  petit-texte-gras bg-bleu-foncé py-3 px-8 text-white rounded-[5px] effet-bleu tracking-wide'>
             <a href={lessonLink} target="_blank" rel="noopener noreferrer">
               {name}
             </a>
