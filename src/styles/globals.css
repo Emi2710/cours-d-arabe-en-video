@@ -158,7 +158,10 @@ body {
 progress[value] {
   width: 180px;
   height: 15px;
+  -webkit-appearance: none;
+   appearance: none;
 }
+
 
 progress[value]::-webkit-progress-bar {
   background-color: #C3CFD9;
@@ -167,8 +170,7 @@ progress[value]::-webkit-progress-bar {
 
 progress[value]::-webkit-progress-value {
   background-color: #56C1A8;
-
-  border-radius: 0.;
+  border-radius: 5px;
 }
 
 /* CHECKBOX STYLING */

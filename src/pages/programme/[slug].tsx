@@ -138,7 +138,7 @@ const renderDefaultView = () => {
             <div className='flex flex-col lg:flex-row lg:items-center'>
               <p className='hidden sm:block bold lg:petit-titre'>Progression:</p>
               <div className='flex items-center mb-10 lg:mb-0 lg:ml-2'>
-                <progress id='file' max='100' value={calculateChapterProgress(cours.name)} className='progress_bar' />
+                <progress max='100' value={calculateChapterProgress(cours.name)} className='progress_bar' />
                 <p className='pl-2'>{calculateChapterProgress(cours.name)}%</p>
               </div> 
 
