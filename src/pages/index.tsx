@@ -82,14 +82,14 @@ export default function Home() {
 
         <Informations
           title="Qui suis-je ?"
-          content="Je suis `Abd Ar-Rahman Abu Imran, je suis français et j’ai eu l’opportunité (par la grâce d’Allah) 
-            d’étudier dans plusieurs endroits réputés pour la transmission des sciences bénéfiques:
-            J’ai étudié il y a un plus de dix ans la langue arabe en Egypte, dans le Merkez Al Ibaanah dont j’ai 
+          content="Je suis `Abd Ar-Rahman Abu Imran, je suis français et j&apos;ai eu l&apos;opportunité (par la grâce d&apos;Allah) 
+            d&apos;étudier dans plusieurs endroits réputés pour la transmission des sciences bénéfiques:
+            J&apos;ai étudié il y a un plus de dix ans la langue arabe en Egypte, dans le Merkez Al Ibaanah dont j&apos;ai 
             terminé le cursus avec succès.
-            J’ai ensuite étudié la science au Yemen auprès de Chouyoukhs tels que Cheikh `Abd Ar-Rahman 
+            J&apos;ai ensuite étudié la science au Yemen auprès de Chouyoukhs tels que Cheikh `Abd Ar-Rahman 
             Al Adani (rahimahuLlah) et Cheikh Yassin al Adani (rahimahuLlah) et je suis depuis quelques 
-            années installé en Arabie saoudite ou j’étudie auprès de machayekh tels que Cheikh Abd’ al 
-            Muhsin al Abbad et Cheikh Suleyman al Ruheyli et d’autres HafidhahumuLlah."
+            années installé en Arabie saoudite ou j&apos;étudie auprès de machayekh tels que Cheikh Abd&apos; al 
+            Muhsin al Abbad et Cheikh Suleyman al Ruheyli et d&apos;autres HafidhahumuLlah."
           linkTitle="Plus sur mon parcours"
           linkUrl="qui-suis-je"
         />
@@ -99,13 +99,13 @@ export default function Home() {
         <Informations
           title="Par quoi commencer ?"
           content="Avant toute chose, sachez que les pré requis les plus importants pour votre succès dans 
-            l’apprentissage sont les suivants : 
+            l&apos;apprentissage sont les suivants : 
             La motivation
             Le travail
             La patience
             Je met a votre disposition des ressources qui vous seront bi idhniLlah bénéfiques mais elles ne 
-            vous seront d’aucune utilité si vous n’y mettez pas de votre investissement personnel.
-            Si vous êtes déjà passe par l’étape de l’apprentissage des lettres arabes et de la lecture 
+            vous seront d&apos;aucune utilité si vous n&apos;y mettez pas de votre investissement personnel.
+            Si vous êtes déjà passe par l&apos;étape de l&apos;apprentissage des lettres arabes et de la lecture 
             sommaire vous trouverez sur le site différents programmes accessibles selon votre niveau. 
             Vous aurez accès aux cours de manière progressive, et ce pour chaque programme. Vous devrez 
             donc valider les paliers pour pouvoir passer aux cours suivants"
@@ -120,11 +120,11 @@ export default function Home() {
           content="Peu importe votre niveau actuel, que vous soyez un grand débutant ou un étudiant confirmé, nos 
             programmes ont été conçus pour vous faire progresser et passer au niveau supérieur dans la 
             langue arabe.
-            Notre approche pédagogique progressive vous permettra d'acquérir les bases solides de la 
+            Notre approche pédagogique progressive vous permettra d&apos;acquérir les bases solides de la 
             langue et de développer vos compétences linguistiques de manière cohérente. Chaque 
             programme est soigneusement conçu pour renforcer vos connaissances et vous permettre 
-            d'atteindre des niveaux de maîtrise supérieurs.
-            L'objectif ultime de nos programmes est de vous donner les outils nécessaires pour lire des livres 
+            d&apos;atteindre des niveaux de maîtrise supérieurs.
+            L&apos;objectif ultime de nos programmes est de vous donner les outils nécessaires pour lire des livres 
             en arabe, suivre des cours dispensés par les savants et accéder à la connaissance directement 
             en arabe, sans avoir à recourir à des traductions en français"
           linkTitle="Consulte la FAQ"
