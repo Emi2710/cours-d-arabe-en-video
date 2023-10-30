@@ -5,6 +5,10 @@ export default defineType({
   name: 'programmes',
   title: 'Programmes',
   type: 'document',
+  validation: Rule => Rule.custom(fields => {
+    if (fields.title.length < 0 && fields.slug.length < 0) return "Veuillez remplir les champs obligatoires"
+    return true
+  }),
   fields: [
     defineField({
       name: 'title',

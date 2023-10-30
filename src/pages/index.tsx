@@ -28,13 +28,17 @@ export default function Home() {
       </svg>
       
 
-      <p className="petit-texte px-5 py-3 text-gris-foncé max-w-xl lg:max-w-2xl">
-        Korem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per 
-      </p>
+      <p className="petit-texte px-5 py-3 text-gris-foncé max-w-xl lg:max-w-2xl">Bienvenue sur notre site d'apprentissage de la langue arabe et des sciences religieuses &#8230;.. !  Nous sommes ravis de vous pr&eacute;senter notre programme complet con&ccedil;u pour vous aider &agrave;  ma&icirc;triser l'arabe de mani&egrave;re progressive et efficace, ainsi que nos programmes destin&eacute;s a  renforcer vos connaissance dans certaines sciences fondamentales et des cours religieux dans  des domaines qui nous concernent tous tels que la pri&egrave;re, le commerce, le ramadan..etc.</p>
 
-      <p className="petit-texte px-5 py-3 text-gris-foncé max-w-xl lg:max-w-2xl">
-        luctus enim egestas, ac scelerisque ante pulvinar. Donec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel
-      </p>
+      <p className="petit-texte px-5 py-3 text-gris-foncé max-w-xl lg:max-w-2xl">Pour la langue arabe notre approche p&eacute;dagogique repose sur une s&eacute;rie de cours vid&eacute;o structur&eacute;s,  en commen&ccedil;ant par les &quot;Tomes de M&eacute;dine&quot; et en continuant avec d'autres ressources  renomm&eacute;es telles que &quot;Al Ajrumyia&quot; et &quot;Qisas an Nabiyin&quot;.</p>
+
+      <p className="petit-texte px-5 py-3 text-gris-foncé max-w-xl lg:max-w-2xl">Apres les retours positifs et les accomplissements de mes &eacute;l&egrave;ves sur Telegram, nous avons  d&eacute;cid&eacute; de faire profiter un encore plus grand nombre a travers un syst&egrave;me davantage accessible  et personnalis&eacute;.  Vous trouverez des le&ccedil;ons sous forme de vid&eacute;os, facilitant ainsi votre apprentissage en vous  permettant de visualiser les concepts cl&eacute;s et d'entendre la prononciation correcte mais &eacute;galement  les supports PDF t&eacute;l&eacute;chargeables li&eacute;s a chaque le&ccedil;on.</p>
+
+      <p className="petit-texte px-5 py-3 text-gris-foncé max-w-xl lg:max-w-2xl">Chaque &eacute;l&egrave;ve b&eacute;n&eacute;ficiera d'un espace membre personnel, o&ugrave; il pourra suivre sa progression et  ainsi reprendre la ou il en est rest&eacute;, revoir les le&ccedil;ons pr&eacute;c&eacute;dentes et acc&eacute;der &agrave; des exercices  pratiques pour consolider ses connaissances.</p>
+
+      <p className="petit-texte px-5 py-3 text-gris-foncé max-w-xl lg:max-w-2xl">Que vous soyez d&eacute;butant ou que vous souhaitiez perfectionner vos comp&eacute;tences en arabe, notre  site vous offre une opportunit&eacute; unique d'apprendre cette magnifique langue &agrave; votre rythme, avec  des ressources de qualit&eacute; et une organisation personnalis&eacute;e.</p>
+
+      <p className="petit-texte px-5 py-3 text-gris-foncé max-w-xl lg:max-w-2xl">Rejoignez-nous d&egrave;s maintenant et commencez votre voyage passionnant dans l'apprentissage de  la langue arabe et des sciences &agrave; travers nos vid&eacute;os enrichissantes et notre espace membre  d&eacute;di&eacute; &agrave; votre progression personnelle !</p>
 
 
 
@@ -48,17 +52,17 @@ export default function Home() {
 
           <DecouvreProgramme 
             title='Principes des sciences légiférées'
-            content='Korem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus'
+            content='Apres avoir travaillé l’outil indispensable donnant l’accès direct au sciences religieuses dans le  programme de langue arabe, le programme des sciences légiférées a été mis en place afin de  découvrir a travers celui-ci des introductions essentielles a la bonne maitrise des sciences  religieuses.  Les sciences religieuses sont de deux types...'
           />
 
           <DecouvreProgramme 
             title='Langue arabe'
-            content='Korem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus'
+            content="Les 'Tomes de Médine' constituent la pierre angulaire de notre programme. Ils sont largement  reconnus dans le monde de l'enseignement de l'arabe comme une référence pour les apprenants  de tous niveaux. Une fois que vous aurez acquis une solide base avec les 'Tomes de Médine', nous vous  proposons d'approfondir vos connaissances avec..."
           />
 
           <DecouvreProgramme 
             title='Cours religieux en français'
-            content='Korem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus'
+            content='Ce programme est constitué d’une série de cours en audio et video en français exclusivement  dans chacune des matières religieuses. Nous avons essayé d’observer un ordre de priorité selon  l’intérêt de la matière et le besoin ressenti chez les musulmans de France et d’occident...'
           />
 
         </div>
@@ -78,7 +82,14 @@ export default function Home() {
 
         <Informations
           title="Qui suis-je ?"
-          content="Korem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, sollicitudin lacus, Korem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, sollicitudin lacus, Korem ipsum dolor sit amet"
+          content="Je suis `Abd Ar-Rahman Abu Imran, je suis français et j’ai eu l’opportunité (par la grâce d’Allah) 
+            d’étudier dans plusieurs endroits réputés pour la transmission des sciences bénéfiques:
+            J’ai étudié il y a un plus de dix ans la langue arabe en Egypte, dans le Merkez Al Ibaanah dont j’ai 
+            terminé le cursus avec succès.
+            J’ai ensuite étudié la science au Yemen auprès de Chouyoukhs tels que Cheikh `Abd Ar-Rahman 
+            Al Adani (rahimahuLlah) et Cheikh Yassin al Adani (rahimahuLlah) et je suis depuis quelques 
+            années installé en Arabie saoudite ou j’étudie auprès de machayekh tels que Cheikh Abd’ al 
+            Muhsin al Abbad et Cheikh Suleyman al Ruheyli et d’autres HafidhahumuLlah."
           linkTitle="Plus sur mon parcours"
           linkUrl="qui-suis-je"
         />
@@ -87,8 +98,18 @@ export default function Home() {
 
         <Informations
           title="Par quoi commencer ?"
-          content="Korem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, sollicitudin lacus, Korem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, sollicitudin lacus, Korem ipsum dolor sit amet"
-          linkTitle="Apprends comment bien démarrer ici"
+          content="Avant toute chose, sachez que les pré requis les plus importants pour votre succès dans 
+            l’apprentissage sont les suivants : 
+            La motivation
+            Le travail
+            La patience
+            Je met a votre disposition des ressources qui vous seront bi idhniLlah bénéfiques mais elles ne 
+            vous seront d’aucune utilité si vous n’y mettez pas de votre investissement personnel.
+            Si vous êtes déjà passe par l’étape de l’apprentissage des lettres arabes et de la lecture 
+            sommaire vous trouverez sur le site différents programmes accessibles selon votre niveau. 
+            Vous aurez accès aux cours de manière progressive, et ce pour chaque programme. Vous devrez 
+            donc valider les paliers pour pouvoir passer aux cours suivants"
+                      linkTitle="Apprends comment bien démarrer ici"
           linkUrl="bien-commencer-son-apprentissage"
         />
 
@@ -96,7 +117,16 @@ export default function Home() {
 
         <Informations
           title="Quels résultats ?"
-          content="Korem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, sollicitudin lacus, Korem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, sollicitudin lacus, Korem ipsum dolor sit amet"
+          content="Peu importe votre niveau actuel, que vous soyez un grand débutant ou un étudiant confirmé, nos 
+            programmes ont été conçus pour vous faire progresser et passer au niveau supérieur dans la 
+            langue arabe.
+            Notre approche pédagogique progressive vous permettra d'acquérir les bases solides de la 
+            langue et de développer vos compétences linguistiques de manière cohérente. Chaque 
+            programme est soigneusement conçu pour renforcer vos connaissances et vous permettre 
+            d'atteindre des niveaux de maîtrise supérieurs.
+            L'objectif ultime de nos programmes est de vous donner les outils nécessaires pour lire des livres 
+            en arabe, suivre des cours dispensés par les savants et accéder à la connaissance directement 
+            en arabe, sans avoir à recourir à des traductions en français"
           linkTitle="Consulte la FAQ"
           linkUrl="faq"
         />
