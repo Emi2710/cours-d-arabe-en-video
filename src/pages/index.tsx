@@ -28,7 +28,7 @@ export default function Home() {
       </svg>
       
 
-      <p className="petit-texte px-5 py-3 text-gris-foncé max-w-xl lg:max-w-2xl">Bienvenue sur notre site d&apos;apprentissage de la langue arabe et des sciences religieuses &#8230;.. !  Nous sommes ravis de vous pr&eacute;senter notre programme complet con&ccedil;u pour vous aider &agrave;  ma&icirc;triser l&apos;arabe de mani&egrave;re progressive et efficace, ainsi que nos programmes destin&eacute;s a  renforcer vos connaissance dans certaines sciences fondamentales et des cours religieux dans  des domaines qui nous concernent tous tels que la pri&egrave;re, le commerce, le ramadan..etc.</p>
+      <p className="petit-texte px-5 py-3 text-gris-foncé max-w-xl lg:max-w-2xl">Bienvenue sur notre site d&apos;apprentissage de la langue arabe et des sciences religieuses !  Nous sommes ravis de vous pr&eacute;senter notre programme complet con&ccedil;u pour vous aider &agrave;  ma&icirc;triser l&apos;arabe de mani&egrave;re progressive et efficace, ainsi que nos programmes destin&eacute;s a  renforcer vos connaissance dans certaines sciences fondamentales et des cours religieux dans  des domaines qui nous concernent tous tels que la pri&egrave;re, le commerce, le ramadan..etc.</p>
 
 
 
