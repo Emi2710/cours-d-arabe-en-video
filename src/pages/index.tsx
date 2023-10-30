@@ -28,17 +28,17 @@ export default function Home() {
       </svg>
       
 
-      <p className="petit-texte px-5 py-3 text-gris-foncé max-w-xl lg:max-w-2xl">Bienvenue sur notre site d'apprentissage de la langue arabe et des sciences religieuses &#8230;.. !  Nous sommes ravis de vous pr&eacute;senter notre programme complet con&ccedil;u pour vous aider &agrave;  ma&icirc;triser l'arabe de mani&egrave;re progressive et efficace, ainsi que nos programmes destin&eacute;s a  renforcer vos connaissance dans certaines sciences fondamentales et des cours religieux dans  des domaines qui nous concernent tous tels que la pri&egrave;re, le commerce, le ramadan..etc.</p>
+      <p className="petit-texte px-5 py-3 text-gris-foncé max-w-xl lg:max-w-2xl">Bienvenue sur notre site d'apprentissage de la langue arabe et des sciences religieuses &#8230;.. !  Nous sommes ravis de vous pr&eacute;senter notre programme complet con&ccedil;u pour vous aider &agrave;  ma&icirc;triser l&apos;arabe de mani&egrave;re progressive et efficace, ainsi que nos programmes destin&eacute;s a  renforcer vos connaissance dans certaines sciences fondamentales et des cours religieux dans  des domaines qui nous concernent tous tels que la pri&egrave;re, le commerce, le ramadan..etc.</p>
 
       <p className="petit-texte px-5 py-3 text-gris-foncé max-w-xl lg:max-w-2xl">Pour la langue arabe notre approche p&eacute;dagogique repose sur une s&eacute;rie de cours vid&eacute;o structur&eacute;s,  en commen&ccedil;ant par les &quot;Tomes de M&eacute;dine&quot; et en continuant avec d'autres ressources  renomm&eacute;es telles que &quot;Al Ajrumyia&quot; et &quot;Qisas an Nabiyin&quot;.</p>
 
-      <p className="petit-texte px-5 py-3 text-gris-foncé max-w-xl lg:max-w-2xl">Apres les retours positifs et les accomplissements de mes &eacute;l&egrave;ves sur Telegram, nous avons  d&eacute;cid&eacute; de faire profiter un encore plus grand nombre a travers un syst&egrave;me davantage accessible  et personnalis&eacute;.  Vous trouverez des le&ccedil;ons sous forme de vid&eacute;os, facilitant ainsi votre apprentissage en vous  permettant de visualiser les concepts cl&eacute;s et d'entendre la prononciation correcte mais &eacute;galement  les supports PDF t&eacute;l&eacute;chargeables li&eacute;s a chaque le&ccedil;on.</p>
+      <p className="petit-texte px-5 py-3 text-gris-foncé max-w-xl lg:max-w-2xl">Apres les retours positifs et les accomplissements de mes &eacute;l&egrave;ves sur Telegram, nous avons  d&eacute;cid&eacute; de faire profiter un encore plus grand nombre à travers un syst&egrave;me davantage accessible  et personnalis&eacute;.  Vous trouverez des le&ccedil;ons sous forme de vid&eacute;os, facilitant ainsi votre apprentissage en vous  permettant de visualiser les concepts cl&eacute;s et d&apos;entendre la prononciation correcte mais &eacute;galement  les supports PDF t&eacute;l&eacute;chargeables li&eacute;s a chaque le&ccedil;on.</p>
 
       <p className="petit-texte px-5 py-3 text-gris-foncé max-w-xl lg:max-w-2xl">Chaque &eacute;l&egrave;ve b&eacute;n&eacute;ficiera d'un espace membre personnel, o&ugrave; il pourra suivre sa progression et  ainsi reprendre la ou il en est rest&eacute;, revoir les le&ccedil;ons pr&eacute;c&eacute;dentes et acc&eacute;der &agrave; des exercices  pratiques pour consolider ses connaissances.</p>
 
       <p className="petit-texte px-5 py-3 text-gris-foncé max-w-xl lg:max-w-2xl">Que vous soyez d&eacute;butant ou que vous souhaitiez perfectionner vos comp&eacute;tences en arabe, notre  site vous offre une opportunit&eacute; unique d'apprendre cette magnifique langue &agrave; votre rythme, avec  des ressources de qualit&eacute; et une organisation personnalis&eacute;e.</p>
 
-      <p className="petit-texte px-5 py-3 text-gris-foncé max-w-xl lg:max-w-2xl">Rejoignez-nous d&egrave;s maintenant et commencez votre voyage passionnant dans l'apprentissage de  la langue arabe et des sciences &agrave; travers nos vid&eacute;os enrichissantes et notre espace membre  d&eacute;di&eacute; &agrave; votre progression personnelle !</p>
+      <p className="petit-texte px-5 py-3 text-gris-foncé max-w-xl lg:max-w-2xl">Rejoignez-nous d&egrave;s maintenant et commencez votre voyage passionnant dans l&apos;apprentissage de  la langue arabe et des sciences &agrave; travers nos vid&eacute;os enrichissantes et notre espace membre  d&eacute;di&eacute; &agrave; votre progression personnelle !</p>
 
 
 
@@ -52,7 +52,7 @@ export default function Home() {
 
           <DecouvreProgramme 
             title='Principes des sciences légiférées'
-            content='Apres avoir travaillé l’outil indispensable donnant l’accès direct au sciences religieuses dans le  programme de langue arabe, le programme des sciences légiférées a été mis en place afin de  découvrir a travers celui-ci des introductions essentielles a la bonne maitrise des sciences  religieuses.  Les sciences religieuses sont de deux types...'
+            content='Apres avoir travaillé l&apos;outil indispensable donnant l&apos;accès direct au sciences religieuses dans le  programme de langue arabe, le programme des sciences légiférées a été mis en place afin de  découvrir a travers celui-ci des introductions essentielles a la bonne maitrise des sciences  religieuses.  Les sciences religieuses sont de deux types...'
           />
 
           <DecouvreProgramme 
@@ -62,7 +62,7 @@ export default function Home() {
 
           <DecouvreProgramme 
             title='Cours religieux en français'
-            content='Ce programme est constitué d’une série de cours en audio et video en français exclusivement  dans chacune des matières religieuses. Nous avons essayé d’observer un ordre de priorité selon  l’intérêt de la matière et le besoin ressenti chez les musulmans de France et d’occident...'
+            content='Ce programme est constitué d&apos;une série de cours en audio et video en français exclusivement  dans chacune des matières religieuses. Nous avons essayé d&apos;observer un ordre de priorité selon  l&apos;intérêt de la matière et le besoin ressenti chez les musulmans de France et d&apos;occident...'
           />
 
         </div>
