@@ -82,11 +82,11 @@ export default function Home() {
 
         <Informations
           title="Qui suis-je ?"
-          content="Je suis `Abd Ar-Rahman Abu Imran, je suis français et j&apos;ai eu l&apos;opportunité (par la grâce d&apos;Allah) 
+          content="Je suis &apos;Abd Ar-Rahman Abu Imran, je suis français et j&apos;ai eu l&apos;opportunité (par la grâce d&apos;Allah) 
             d&apos;étudier dans plusieurs endroits réputés pour la transmission des sciences bénéfiques:
             J&apos;ai étudié il y a un plus de dix ans la langue arabe en Egypte, dans le Merkez Al Ibaanah dont j&apos;ai 
             terminé le cursus avec succès.
-            J&apos;ai ensuite étudié la science au Yemen auprès de Chouyoukhs tels que Cheikh `Abd Ar-Rahman 
+            J&apos;ai ensuite étudié la science au Yemen auprès de Chouyoukhs tels que Cheikh &apos;Abd Ar-Rahman 
             Al Adani (rahimahuLlah) et Cheikh Yassin al Adani (rahimahuLlah) et je suis depuis quelques 
             années installé en Arabie saoudite ou j&apos;étudie auprès de machayekh tels que Cheikh Abd&apos; al 
             Muhsin al Abbad et Cheikh Suleyman al Ruheyli et d&apos;autres HafidhahumuLlah."
@@ -105,7 +105,7 @@ export default function Home() {
             La patience
             Je met a votre disposition des ressources qui vous seront bi idhniLlah bénéfiques mais elles ne 
             vous seront d&apos;aucune utilité si vous n&apos;y mettez pas de votre investissement personnel.
-            Si vous êtes déjà passe par l&apos;étape de l&apos;apprentissage des lettres arabes et de la lecture 
+            Si vous êtes déjà passé par l&apos;étape de l&apos;apprentissage des lettres arabes et de la lecture 
             sommaire vous trouverez sur le site différents programmes accessibles selon votre niveau. 
             Vous aurez accès aux cours de manière progressive, et ce pour chaque programme. Vous devrez 
             donc valider les paliers pour pouvoir passer aux cours suivants"
