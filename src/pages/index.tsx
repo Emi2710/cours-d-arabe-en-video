@@ -11,6 +11,13 @@ export default function Home() {
     <Layout>
       <Head>
           <title>Cours d&apos;arabe en vidéo gratuit - jusqu&apos;à devenir arabophone</title>
+          <meta name="description" content="
+          Bienvenue sur notre site d'apprentissage de la langue arabe et des sciences religieuses ! 
+          Nous sommes ravis de vous présenter notre programme complet conçu pour vous aider à 
+          maîtriser l'arabe de manière progressive et efficace, ainsi que nos programmes destinés a 
+          renforcer vos connaissance dans certaines sciences fondamentales et des cours religieux dans 
+          des domaines qui nous concernent tous tels que la prière, le commerce, le ramadan..etc.
+          " />
       </Head>
 
       <div className="accueil_hero--header w-screen h-screen text-center flex flex-col justify-center items-center sm:relative top-7 lg:top-0 z-10">
@@ -40,20 +47,28 @@ export default function Home() {
 
         <div className="xl:flex xl:mx-16 justify-center items-center">
 
-          <DecouvreProgramme 
-            title='Principes des sciences légiférées'
-            content='Apres avoir travaillé l&apos;outil indispensable donnant l&apos;accès direct au sciences religieuses dans le  programme de langue arabe, le programme des sciences légiférées a été mis en place...'
-          />
+          <Link href="/programme/principes-des-sciences-legiferees">
+            <DecouvreProgramme 
+              title='Principes des sciences légiférées'
+              content='Apres avoir travaillé l&apos;outil indispensable donnant l&apos;accès direct au sciences religieuses dans le  programme de langue arabe, le programme des sciences légiférées a été mis en place...'
+            />
+          </Link>
 
-          <DecouvreProgramme 
-            title='Langue arabe'
-            content="Les 'Tomes de Médine' constituent la pierre angulaire de notre programme. Ils sont largement  reconnus dans le monde de l'enseignement de l'arabe comme une référence pour..."
-          />
+          <Link href="/programme/cours-d-arabe-en-video">
+            <DecouvreProgramme 
+              title='Langue arabe'
+              content="Les 'Tomes de Médine' constituent la pierre angulaire de notre programme. Ils sont largement  reconnus dans le monde de l'enseignement de l'arabe comme une référence pour..."
+            />  
+          </Link>
 
-          <DecouvreProgramme 
-            title='Cours religieux en français'
-            content='Ce programme est constitué d&apos;une série de cours en audio et video en français exclusivement  dans chacune des matières religieuses. Nous avons essayé d&apos;observer un ordre de priorité selon  l&apos;intérêt...'
-          />
+          <Link href="/programme/cours-religieux-en-français">
+            <DecouvreProgramme 
+              title='Cours religieux en français'
+              content='Ce programme est constitué d&apos;une série de cours en audio et video en français exclusivement  dans chacune des matières religieuses. Nous avons essayé d&apos;observer un ordre de priorité selon  l&apos;intérêt...'
+            /> 
+          </Link>
+
+          
 
         </div>
 
@@ -90,9 +105,9 @@ export default function Home() {
           title="Par quoi commencer ?"
           content="Avant toute chose, sachez que les pré requis les plus importants pour votre succès dans 
             l&apos;apprentissage sont les suivants : 
-            La motivation
-            Le travail
-            La patience
+            la motivation,
+            le travail,
+            la patience.
             Je met a votre disposition des ressources qui vous seront bi idhniLlah bénéfiques mais elles ne 
             vous seront d&apos;aucune utilité si vous n&apos;y mettez pas de votre investissement personnel.
             Si vous êtes déjà passé par l&apos;étape de l&apos;apprentissage des lettres arabes et de la lecture 

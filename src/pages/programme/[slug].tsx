@@ -418,6 +418,7 @@ const [showSummaryBtn, setShowSummaryBtn] = useState(false);
     <Layout>
       <Head>
           <title>{programme.title}</title>
+          <meta name="description" content={programme.introShort} />
       </Head>
       <div className='mx-5'>
       <div>

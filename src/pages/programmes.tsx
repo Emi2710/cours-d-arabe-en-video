@@ -16,6 +16,10 @@ function programmes({programmes}: Props) {
     <Layout>
       <Head>
           <title>Programmes de cours d&apos;arabe, principe des sciences légiférées, cours religieux...</title>
+          <meta name="description" content='Si vous suivez de manière sérieuse et assidue les cours ainsi que les exercices, au fil des 
+            programmes vous verrez votre niveau d’arabe s’améliorer et vous serez bientôt capable de 
+            comprendre les cours des savants en langue arabe, lire le Qur’an en le comprenant, vous 
+            exprimer de manière éloquente avec des arabophones… et la réussite appartient à Allah' />
       </Head>
       <div className='mb-32'>
         <div className='md:flex justify-around items-center'>
