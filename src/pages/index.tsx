@@ -61,7 +61,7 @@ export default function Home() {
             />  
           </Link>
 
-          <Link href="/programme/cours-religieux-en-français">
+          <Link href="/programme/cours-religieux-en-francais">
             <DecouvreProgramme 
               title='Cours religieux en français'
               content='Ce programme est constitué d&apos;une série de cours en audio et video en français exclusivement  dans chacune des matières religieuses. Nous avons essayé d&apos;observer un ordre de priorité selon  l&apos;intérêt...'
