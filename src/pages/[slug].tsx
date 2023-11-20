@@ -78,14 +78,20 @@ const Page = ({page}: Props) => {
             ) : ''}
           </div>
           
+          {page.buttonCta? (
+
+            <div  className='flex justify-center'>
+
+              <Link href={`${page.buttonCta?.btnUrl}`} className=''>
+                <button className='hover-animation max-w-3xl mx-auto mb-28 text-xl bold bg-bleu-foncé py-4 px-6 text-white rounded-[5px] effet-bleu tracking-wide'>{page.buttonCta?.btnText}</button>
+              </Link>
+
+            </div>
+
+
+
+          ) : ''}
           
-          <div  className='flex justify-center'>
-
-            <Link href={`${page.buttonCta?.btnUrl}`} className=''>
-              <button className='hover-animation max-w-3xl mx-auto mb-28 text-xl bold bg-bleu-foncé py-4 px-6 text-white rounded-[5px] effet-bleu tracking-wide'>{page.buttonCta?.btnText}</button>
-            </Link>
-
-          </div>
 
           
       </article>
