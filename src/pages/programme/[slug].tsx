@@ -208,7 +208,7 @@ const renderDefaultView = () => {
                       
                         ))}
                     </div>
-                    {cours.ressourcesUtiles && (<p className='mt-3 underline bold text-gris-foncé'>Vocabulaire de ...</p>)} 
+                    {cours.ressourcesUtiles && (<p className='mt-3 underline bold text-gris-foncé'>Vocabulaire</p>)} 
                    
                   </div>
 
@@ -946,6 +946,8 @@ const [showSummaryBtn, setShowSummaryBtn] = useState(false);
                                       
                                   ))}
 
+                                  
+
                                   <div className='flex flex-col items-center justify-center'>
                                     <div className='flex items-center justify-center mt-4 bg-white border-gris-contour border-3 w-[225px] mx-auto py-3'>
                                       {chapterRessources?.map((ressource) => (
@@ -976,7 +978,7 @@ const [showSummaryBtn, setShowSummaryBtn] = useState(false);
                                       
                                         ))}
                                     </div>
-                                    {chapterRessources && (<p className='mt-3 underline bold text-gris-foncé'>Vocabulaire de ...</p>)} 
+                                    {chapterRessources && (<p className='mt-3 underline bold text-gris-foncé'>Vocabulaire</p>)} 
                                   
                                   </div>
 

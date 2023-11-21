@@ -25,7 +25,7 @@ const Custom404Page: React.FC = () => {
             </button>
           </Link>
 
-          <Link href="/contact">
+          <Link href="/signaler-bug">
             <button 
               className='hover-animation flex items-center justify-center w-[190px] mx-2 mt-5 text-lg bold bg-gris-contour py-2 text-white rounded-[5px] tracking-wide'>
               <p className='mr-1'>Signaler un bug</p>

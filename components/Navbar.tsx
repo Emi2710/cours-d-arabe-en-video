@@ -32,13 +32,13 @@ export default function Navbar({}: Props) {
                     <Link href="/" className='px-5'>Accueil</Link>
                     <Link href="/programmes" className='px-5'>Programmes</Link>
                     <p className='px-5 cursor-pointer' onClick={() => setDropDownOpen(!dropDownOpen)}>Informations</p>
-                    <Link href="/contact" className='px-5'>Contacter</Link>    
+                    <Link href="/contact" className='px-5'>Contact</Link>    
             </div>
             
             
         </div>
 
-        <div className={'information-dropdown flex flex-col absolute right-16 bg-white z-30 effet-orange'  +
+        <div className={'information-dropdown flex flex-col absolute right-16 bg-white z-30'  +
               (dropDownOpen ? " block" : " hidden")}>
 
                 <Link href="/bien-commencer-son-apprentissage" className='py-3 px-4 border-3 border-gris-contour' onClick={() => {setDropDownOpen(false)}}>Bien commencer son <br/>apprentissage</Link>

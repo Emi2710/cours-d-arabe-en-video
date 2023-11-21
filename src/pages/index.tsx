@@ -16,7 +16,7 @@ export default function Home() {
           Nous sommes ravis de vous présenter notre programme complet conçu pour vous aider à 
           maîtriser l'arabe de manière progressive et efficace, ainsi que nos programmes destinés a 
           renforcer vos connaissance dans certaines sciences fondamentales et des cours religieux dans 
-          des domaines qui nous concernent tous tels que la prière, le commerce, le ramadan..etc.
+          des domaines qui nous concernent tous tels que la prière, le commerce, le ramadan...
           " />
       </Head>
 
@@ -35,7 +35,7 @@ export default function Home() {
       </svg>
       
 
-      <p className="petit-texte px-5 py-3 text-gris-foncé max-w-xl lg:max-w-2xl">Bienvenue sur notre site d&apos;apprentissage de la langue arabe et des sciences religieuses !  Nous sommes ravis de vous pr&eacute;senter notre programme complet con&ccedil;u pour vous aider &agrave;  ma&icirc;triser l&apos;arabe de mani&egrave;re progressive et efficace, ainsi que nos programmes destin&eacute;s a  renforcer vos connaissance dans certaines sciences fondamentales et des cours religieux dans  des domaines qui nous concernent tous tels que la pri&egrave;re, le commerce, le ramadan..etc.</p>
+      <p className="petit-texte px-5 py-3 text-gris-foncé max-w-xl lg:max-w-2xl">Bienvenue sur notre site d&apos;apprentissage de la langue arabe et des sciences religieuses !  Nous sommes ravis de vous pr&eacute;senter notre programme complet con&ccedil;u pour vous aider &agrave;  ma&icirc;triser l&apos;arabe de mani&egrave;re progressive et efficace, ainsi que nos programmes destin&eacute;s a  renforcer vos connaissance dans certaines sciences fondamentales et des cours religieux dans  des domaines qui nous concernent tous tels que la pri&egrave;re, le commerce, le ramadan...</p>
 
 
 
@@ -50,21 +50,32 @@ export default function Home() {
           <Link href="/programme/principes-des-sciences-legiferees">
             <DecouvreProgramme 
               title='Principes des sciences légiférées'
-              content='Apres avoir travaillé l&apos;outil indispensable donnant l&apos;accès direct au sciences religieuses dans le  programme de langue arabe, le programme des sciences légiférées a été mis en place...'
+              content='
+                Le programme des sciences légiférées a été mis en place afin de 
+                découvrir a travers celui-ci des introductions essentielles a la bonne maitrise des sciences 
+                religieuses. '
             />
           </Link>
 
           <Link href="/programme/cours-d-arabe-en-video">
             <DecouvreProgramme 
               title='Langue arabe'
-              content="Les 'Tomes de Médine' constituent la pierre angulaire de notre programme. Ils sont largement  reconnus dans le monde de l'enseignement de l'arabe comme une référence pour..."
+              content="
+              Les tomes de Médine constituent la pierre angulaire de notre programme. Ils sont largement 
+              reconnus dans le monde de l'enseignement de l'arabe comme une référence pour les apprenants 
+              de tous niveaux.
+              "
             />  
           </Link>
 
           <Link href="/programme/cours-religieux-en-francais">
             <DecouvreProgramme 
               title='Cours religieux en français'
-              content='Ce programme est constitué d&apos;une série de cours en audio et video en français exclusivement  dans chacune des matières religieuses. Nous avons essayé d&apos;observer un ordre de priorité selon  l&apos;intérêt...'
+              content="
+                Série de cours audio et video en français exclusivement 
+                dans chacune des matières religieuses. Un ordre de priorité a été observé selon 
+                l’intérêt de la matière et le besoin ressenti chez les musulmans de France et d’occident.
+              "
             /> 
           </Link>
 
@@ -113,7 +124,7 @@ export default function Home() {
             Si vous êtes déjà passé par l&apos;étape de l&apos;apprentissage des lettres arabes et de la lecture 
             sommaire vous trouverez sur le site différents programmes accessibles selon votre niveau. 
             Vous aurez accès aux cours de manière progressive, et ce pour chaque programme. Vous devrez 
-            donc valider les paliers pour pouvoir passer aux cours suivants"
+            donc valider les paliers pour pouvoir passer aux cours suivants."
                       linkTitle="Apprends comment bien démarrer ici"
           linkUrl="bien-commencer-son-apprentissage"
         />
@@ -131,7 +142,7 @@ export default function Home() {
             d&apos;atteindre des niveaux de maîtrise supérieurs.
             L&apos;objectif ultime de nos programmes est de vous donner les outils nécessaires pour lire des livres 
             en arabe, suivre des cours dispensés par les savants et accéder à la connaissance directement 
-            en arabe, sans avoir à recourir à des traductions en français"
+            en arabe, sans avoir à recourir à des traductions en français."
           linkTitle="Consulte la FAQ"
           linkUrl="faq"
         />
