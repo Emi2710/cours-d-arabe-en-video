@@ -443,7 +443,7 @@ const [showSummaryBtn, setShowSummaryBtn] = useState(false);
       {/* Chapter progression confirmation modal */}
       {isConfirmationOpen && (
         <div className="flex justify-center">
-          <div className="h-100 w-1/3 fixed m-auto text-center bg-white z-50 effet-orange-two rounded-xl py-16">
+          <div className="h-100 w-100 fixed p-5 m-5 text-center bg-white z-50 effet-orange-two rounded-xl py-16">
             <p className='petit-titre'>Êtes vous sûr de vouloir changer la progression du chapitre ?</p>
             <button onClick={handleConfirmation} className="hover-animations bold px-5 my-5 mx-2 bg-vert py-2 text-white rounded-[5px] tracking-wide">Confirmer</button>
             <button onClick={closeConfirmation} className='hover-animations bold px-5 my-5 mx-2 bg-red py-2 text-white rounded-[5px] tracking-wide'>Annuler</button>
