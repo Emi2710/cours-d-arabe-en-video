@@ -24,6 +24,7 @@ const config: Config = {
       'marron': '#B75743',
       'white': '#FFFFFF',
       'black': '#000000',
+      'red': '#D71313'
     },
     fontWeight: {
       'medium': '500',

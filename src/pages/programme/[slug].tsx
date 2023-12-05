@@ -64,24 +64,43 @@ const Page = ({programme}: Props) => {
   };
 
 /* LOGIQUE DE PROGRESSION DES CHAPITRES */
+  const [isConfirmationOpen, setConfirmationOpen] = useState(false);
+  const [confirmedAction, setConfirmedAction] = useState<(() => void) | null>(null);
+
+  const openConfirmation = (action: () => void) => {
+    setConfirmedAction(() => action);
+    setConfirmationOpen(true);
+  };
+
+  const closeConfirmation = () => {
+    setConfirmedAction(null);
+    setConfirmationOpen(false);
+  };
+
+  const handleConfirmation = () => {
+    if (confirmedAction) {
+      confirmedAction();
+    }
+    closeConfirmation();
+  };
 
   // Mettre à jour la progression de l'utilisateur lorsque la checkbox du chapitre est cochée ou décochée
   const handleChapterCheckboxChange = (chapterName: string, isCompleted: boolean) => {
-    // Copier l'état actuel de complétion
-    const updatedCompletion = { ...chapterCompletion };
-    // Mettre à jour la complétion de toutes les leçons à l'intérieur du chapitre spécifié
-    if (isCompleted) {
-      updatedCompletion[chapterName] = programme.cours
-        .find((cours) => cours.name === chapterName)
-        ?.lesson?.map((lesson) => lesson.lessonLink) || [];
-    } else {
-      updatedCompletion[chapterName] = [];
-    }
-    // Mettre à jour l'état local
-    setChapterCompletion(updatedCompletion);
-    // Sauvegarder la progression dans le localStorage
-    localStorage.setItem('chapterCompletion', JSON.stringify(updatedCompletion));
+    openConfirmation(() => {
+      const updatedCompletion = { ...chapterCompletion };
+      if (isCompleted) {
+        updatedCompletion[chapterName] =
+          programme.cours.find((cours) => cours.name === chapterName)?.lesson?.map((lesson) => lesson.lessonLink) || [];
+      } else {
+        updatedCompletion[chapterName] = [];
+      }
+
+      setChapterCompletion(updatedCompletion);
+      localStorage.setItem('chapterCompletion', JSON.stringify(updatedCompletion));
+    });
   };
+
+  
 
 /* SYSTEME DE TRI DES COURS */
 
@@ -420,6 +439,18 @@ const [showSummaryBtn, setShowSummaryBtn] = useState(false);
           <title>{programme.title}</title>
           <meta name="description" content={programme.introShort} />
       </Head>
+      
+      {/* Chapter progression confirmation modal */}
+      {isConfirmationOpen && (
+        <div className="flex justify-center">
+          <div className="h-100 w-1/3 fixed m-auto text-center bg-white z-50 effet-orange-two rounded-xl py-16">
+            <p className='petit-titre'>Êtes vous sûr de vouloir changer la progression du chapitre ?</p>
+            <button onClick={handleConfirmation} className="hover-animations bold px-5 my-5 mx-2 bg-vert py-2 text-white rounded-[5px] tracking-wide">Confirmer</button>
+            <button onClick={closeConfirmation} className='hover-animations bold px-5 my-5 mx-2 bg-red py-2 text-white rounded-[5px] tracking-wide'>Annuler</button>
+          </div>
+        </div>
+      )}
+
       <div className='mx-5'>
       <div>
 

@@ -110,6 +110,10 @@ body {
   filter: drop-shadow(0px 4px 20px rgba(244, 117, 89, 0.4));
 }
 
+.effet-orange-two {
+  filter: drop-shadow(0px 20px 40px rgba(0, 0, 0, 0.4));
+}
+
 .effet-gris {
   filter: drop-shadow(0px 4px 20px #F2F5F7);
 }
