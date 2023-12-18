@@ -15,7 +15,7 @@ const config: Config = {
       'texte-clair': '#5E6D7A',
       'vert': '#56C1A8',
       'vert-1/2': '#1AAE9F',
-      'orange': '#F47559',
+      'orange': '#EF7210',
       'bleu-clair': '#9EC3F9',
       'bleu-foncé': '#4970B6',
       'peche': '#F48F82',
